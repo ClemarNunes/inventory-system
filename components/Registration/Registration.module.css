@@ -1,0 +1,53 @@
+.FormArea {
+    display: flex;
+  
+    align-items: center;
+    background-color: rgba(46, 51, 56, 0.5);
+    height: 190px;
+ 
+    padding: 20px;
+    border-radius: 20px;
+
+
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    
+
+}
+
+.FormItens {
+    
+    width: 150px;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.FormItens label {
+    margin-bottom: 8px;
+}
+
+.FormItens input {
+    border-radius: 2px;
+    width: 135px;
+    padding: 4px;
+    outline: none;
+    border: none;
+
+  
+
+}
+
+
+.button {
+    width: 120px;
+    height: 33px;
+    background-color: rgb(216, 8, 95);
+    color: white;
+    border: none;
+    border-radius: 20px;
+    margin-top: 8px;
+    border: 1px solid red;
+    
+
+}
