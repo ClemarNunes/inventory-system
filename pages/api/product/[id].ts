@@ -4,7 +4,8 @@ import { NextApiHandler } from "next";
 import prisma from "../../../libs/prisma";
 
 const handlerGet: NextApiHandler = async (req,res) => {
-    const { id } = req.query;
+    const { id, name } = req.query;
+      
 
     const product = await prisma.product.findUnique({
         where: {

@@ -1,35 +1,68 @@
 import styles from './ProductRegistration.module.css';
 import Registration from '../../components/Registration';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import prisma from '../../libs/prisma';
+import { NextApiHandler } from "next";
+import api from '../../libs/api';
 
+type Ok = {
+    id: number;
+    name: string;
+}
+
+type Ok2 = {
+    id: number;
+    name: string
+
+}
+
+
+
+
+type Now = {
+    name: string;
+    id: number;
+    // preco: string;
+    // precoDeVenda: string;
+    // quantidade: string;
+    // data: string;
+
+}
 
 const ProductRegistration = () => {
 
+
+
+    const [oi2, setOi2] = useState<Now[]>([])
     const [searchProduct, setSearchProduct] = useState('');
 
 
-    const handlerSearch = () => {
-        
+    const handlerSearch = async () => {
+        let oi: Now[] = []
+
+        const req = await fetch(`/api/product`);
+        const json = await req.json();
+
+        oi = [];
+
+        for (let i = 0; i < json.product.length; i++) {
+            if (json.product[i].name.startsWith(searchProduct)) {
+                oi.push(json.product[i])
+
+            }
+        }
+        setOi2(oi)
+
     }
 
-
-
+        
     return (
         <div className={styles.Container}>
             <h1>Cadastro de produto</h1>
 
 
 
-            <Registration
-            // ProductName={ProductName} setProductName={setProductName}
-            // price={price} setPrice={setPrice}
-            // salePrice={salePrice} setSalePrice={setSalePrice}
-            // count={count} setCount={setCount}
-            // data={data} setData={setData}
-
-            />
-
-
+            <Registration />
 
             <h1>Listagem De Produto</h1>
 
@@ -42,8 +75,31 @@ const ProductRegistration = () => {
                 />
 
                 <button onClick={handlerSearch} className={styles.button}>Pesquisar</button>
-               
+                 
             </div>
+
+
+
+
+            {/* <div className={styles.teste}>
+
+
+                <div>
+
+
+                    {oi2.map((item, index) => (
+                        <div key={index}>
+                            {item.name}
+                            {item.id}
+                        </div>
+                    ))}
+
+
+                </div>
+
+
+                oi
+            </div> */}
 
             <div className={styles.AreaPesquisa}>
                 <table border={1} className={styles.tableArea}>

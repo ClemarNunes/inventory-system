@@ -1,10 +1,23 @@
 import { NextApiHandler } from "next";
 import prisma from "../../../libs/prisma";
+import api from "../../../libs/api";
 
 
 const handlerGet: NextApiHandler = async (req, res) => {
-    const product = await prisma.product.findMany()
-        res.json({status: product})
+    // const product = await prisma.product.findMany({
+    //     where:{
+    //         name:{
+    //             startsWith: 'c'
+    //         }
+    //     }
+    // })
+    
+    const product = await api.getProducts();
+
+     
+
+        res.json({ product })
+  
     
 }
 
