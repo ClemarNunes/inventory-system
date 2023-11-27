@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import prisma from '../../libs/prisma';
 import { NextApiHandler } from "next";
 import api from '../../libs/api';
+import Table from '../../components/Table';
 
 type Ok = {
     id: number;
@@ -22,10 +23,10 @@ type Ok2 = {
 type Now = {
     name: string;
     id: number;
-    // preco: string;
-    // precoDeVenda: string;
-    // quantidade: string;
-    // data: string;
+    preco: string;
+    precoDeVenda: string;
+    quantidade: string;
+    data: string;
 
 }
 
@@ -33,7 +34,7 @@ const ProductRegistration = () => {
 
 
 
-    const [oi2, setOi2] = useState<Now[]>([])
+    const [data, setData] = useState<Now[]>([])
     const [searchProduct, setSearchProduct] = useState('');
 
 
@@ -51,11 +52,11 @@ const ProductRegistration = () => {
 
             }
         }
-        setOi2(oi)
+        setData(oi)
 
     }
 
-        
+
     return (
         <div className={styles.Container}>
             <h1>Cadastro de produto</h1>
@@ -75,33 +76,11 @@ const ProductRegistration = () => {
                 />
 
                 <button onClick={handlerSearch} className={styles.button}>Pesquisar</button>
-                 
+
             </div>
 
-
-
-
-            {/* <div className={styles.teste}>
-
-
-                <div>
-
-
-                    {oi2.map((item, index) => (
-                        <div key={index}>
-                            {item.name}
-                            {item.id}
-                        </div>
-                    ))}
-
-
-                </div>
-
-
-                oi
-            </div> */}
-
             <div className={styles.AreaPesquisa}>
+
                 <table border={1} className={styles.tableArea}>
                     <thead>
                         <tr>
@@ -115,41 +94,27 @@ const ProductRegistration = () => {
 
                     </thead>
 
-                    <tbody>
-                        <tr>
-                            <td>minoxidil</td>
-                            <td>5</td>
-                            <td>10</td>
-                            <td>17</td>
-                            <td>02/10/2026</td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>minoxidil</td>
-                            <td>5</td>
-                            <td>10</td>
-                            <td>17</td>
-                            <td>02/10/2026</td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>minoxidil</td>
-                            <td>5</td>
-                            <td>10</td>
-                            <td>17</td>
-                            <td>02/10/2026</td>
-                            <td></td>
-                        </tr>
+                    {data.map((item, index) => (
+                        <tbody>
+                            <tr key={index} >
+                               
+                                <Table
+                                    name={item.name}
+                                    id={item.id}
+                                    preco={item.preco}
+                                    precoDeVenda={item.precoDeVenda}
+                                    quantidade={item.quantidade}
+                                    data={item.data}
+                                />
 
-
-
-                    </tbody>
+                            </tr>
+                        </tbody>
+                    ))}
 
                 </table>
 
             </div>
-
-
+            
         </div>
     );
 }

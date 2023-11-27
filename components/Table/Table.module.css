@@ -1,0 +1,19 @@
+
+
+.Container{
+    height: 100%;
+    width: 100%;
+}
+.tableArea{
+    width: 80%;
+    
+    /* padding: 10px; */
+    height: 100%;
+    
+}
+
+
+ .teste{
+    width: 400px;
+    /* border: 1px solid red; */
+ }
