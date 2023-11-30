@@ -43,6 +43,8 @@ const handlerPut: NextApiHandler = async (req, res) => {
      res.json({error: 'não foi possivel alterar esse usuario.'})
 }
 
+
+
 const handlerDelete: NextApiHandler = async (req, res) => {
     const { id } = req.query;
 

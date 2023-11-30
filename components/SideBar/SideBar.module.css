@@ -2,7 +2,7 @@
     height: 100%;
     width: 25%;
     padding: 38px 40px;
-    /* border: 1px solid red; */
+   
 }
 
 .MenuArea{
@@ -13,7 +13,7 @@
     justify-content: center;
     display: flex;
     color: white;
-    box-shadow: 0px 0px 5px #292626;
+    box-shadow: 0px 0px 5px #595a5a;
     /* border: 1px solid blue; */
 }
 
