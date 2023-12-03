@@ -53,7 +53,7 @@ const handlerDelete: NextApiHandler = async (req, res) => {
             id: parseInt(id as string)
         }
     });
-
+ 
     res.json({status: true})
 }
 

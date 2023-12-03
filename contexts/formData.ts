@@ -9,14 +9,14 @@ type FormDataType = {
     ProductName: string;
     setProductName: (setProductName: string) => void;
 
-    price: string;
-    setPrice: (setPrice: string) => void
+    price: number | '';
+    setPrice: (setPrice: number| '' ) => void
 
-    salePrice: string;
-    setSalePrice: (setSalePrice: string) => void
+    salePrice: number | '';
+    setSalePrice: (setSalePrice: number | '' ) => void
 
-    count: string;
-    setCount: (setCount: string) => void
+    count: number | '';
+    setCount: (setCount: number | ''   ) => void
 
     data: string;
     setData: (setData: string) => void

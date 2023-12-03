@@ -1,19 +1,44 @@
-
-
-.Container{
+.Container {
     height: 100%;
     width: 100%;
 }
-.tableArea{
+
+.tableArea {
     width: 80%;
-    
+
     /* padding: 10px; */
     height: 100%;
-    
+
 }
 
 
- .teste{
+.teste {
     width: 400px;
     /* border: 1px solid red; */
- }
+    justify-content: space-between;
+}
+
+.testando {
+
+    display: flex;
+    justify-content: space-between;
+    padding: 5px;
+}
+
+.testando button {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 5px;
+    border-radius: 2px;
+    width: 90px;
+    height: 30px;
+    border-radius: 8%;
+    font-weight: bold;
+    font-size: 15px;
+    background-color: rgb(8, 167, 216);
+    /* background-color: rgb(4, 97, 219); */
+   
+}
+
+ 

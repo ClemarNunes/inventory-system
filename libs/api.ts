@@ -18,6 +18,17 @@ export default {
 
         return product    
     }
+    // ,
+    // Delete: async () => {
+    //     const {id} = req.query
+    //     const deleteProduct = await prisma.product.delete({
+    //         where:{
+    //             id: parseInt(id as string)
+    //         }
+    //     });
+
+    //     return deleteProduct
+    // }
    
     
 }

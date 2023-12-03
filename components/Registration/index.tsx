@@ -4,19 +4,23 @@ import { useState } from 'react';
 import { FormDataContext } from '../../contexts/formData';
 import { useContext } from 'react';
 
- type Props = {
-    setData: (setData:any) => void;
- }
+type Props = {
 
-const Registration = ({setData}: Props) => {
-   
-      
-    
+    handlerSearch: () => void;
+}
+
+const Registration = ({ handlerSearch }: Props) => {
+
+
+
     const FormContext = useContext(FormDataContext)
-   
+
 
     const registerProduct = async (e: React.MouseEvent) => {
         e.preventDefault()
+
+        // let identifier = 
+
 
         const req = await fetch(`/api/product/`, {
             method: 'POST',
@@ -37,6 +41,7 @@ const Registration = ({setData}: Props) => {
             alert('adicionado')
         }
         ClearInput()
+        handlerSearch()
     }
 
 
@@ -56,15 +61,16 @@ const Registration = ({setData}: Props) => {
         })
 
         const json = await req.json();
-        if(json.status){
+        if (json.status) {
             // alert('ALTERADO')
         }
 
-        
+
+        handlerSearch()
         ClearInput()
         // setData({})
-         
-        
+
+
     }
 
     const ClearInput = () => {
@@ -75,7 +81,7 @@ const Registration = ({setData}: Props) => {
         FormContext?.setData('');
     }
 
-    
+
     const submit = (e: React.MouseEvent) => {
         e.preventDefault()
         FormContext?.id ? editProduct() : registerProduct(e);
@@ -97,7 +103,7 @@ const Registration = ({setData}: Props) => {
                             type="text"
                             value={FormContext?.ProductName}
                             onChange={e => FormContext?.setProductName(e.target.value)}
-                            
+
                         />
 
 
@@ -107,7 +113,7 @@ const Registration = ({setData}: Props) => {
                         <label htmlFor="">Preço</label>
                         <input
                             value={FormContext?.price}
-                            onChange={e => FormContext?.setPrice(e.target.value)}
+                            onChange={e => FormContext?.setPrice(parseInt(e.target.value))}
                             type="text"
                         />
 
@@ -117,7 +123,7 @@ const Registration = ({setData}: Props) => {
                         <input
                             type="text"
                             value={FormContext?.salePrice}
-                            onChange={(e => FormContext?.setSalePrice(e.target.value))}
+                            onChange={(e => FormContext?.setSalePrice(parseInt(e.target.value)))}
                         />
 
                     </div>
@@ -127,7 +133,7 @@ const Registration = ({setData}: Props) => {
                         <input
                             type="text"
                             value={FormContext?.count}
-                            onChange={(e => FormContext?.setCount(e.target.value))}
+                            onChange={(e => FormContext?.setCount(parseInt(e.target.value)))}
                         />
 
 
@@ -141,13 +147,8 @@ const Registration = ({setData}: Props) => {
                             onChange={(e => FormContext?.setData(e.target.value))}
                         />
                     </div>
-
                     {/* {FormContext?.dados} */}
-
                     <button onClick={submit} className={styles.button}>Cadastrar</button>
-                    {/* <button onClick={submit}>oi</button> */}
-                    {/* <button onClick={editProduct}>editar</button> */}
-
                 </div>
             </form>
         </div>

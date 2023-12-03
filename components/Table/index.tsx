@@ -1,31 +1,29 @@
 import { FormDataContext } from '../../contexts/formData';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import styles from './Table.module.css';
 
 type Props = {
     id: number;
     name: string;
-    preco: string;
-    precoDeVenda: string;
-    quantidade: string;
+    preco: number;
+    precoDeVenda: number;
+    quantidade: number;
     data: string;
+    handlerSearch: () => void
     // setData: (setData: any) => void;
-    
+
 }
 
 
 
- 
 
-const Table = ({ id, name, preco, precoDeVenda, quantidade, data  }: Props) => {
 
+const Table = ({ id, name, preco, precoDeVenda, quantidade, data, handlerSearch }: Props) => {
     const FormContext = useContext(FormDataContext)
-     
     const [nome, setNome] = useState('')
-  
-    
 
-    const handlerEdit = async ()=> {
-         
+    const handlerEdit = async () => {
+
         const req = await fetch(`/api/product/` + id, {
             method: 'GET'
         })
@@ -40,16 +38,29 @@ const Table = ({ id, name, preco, precoDeVenda, quantidade, data  }: Props) => {
         FormContext?.setId(id)
     }
 
+    const handlerDelete = async () => {
+        const req = await(fetch('/api/product/' + id, {
+            method: 'DELETE'
+        }))
+
+        // const res = await req.json()
+        console.log(req)
+        handlerSearch()
+    }
+
 
     return (
         <>
-            
+
             <td>{name}</td>
-            <td>{preco}</td>
-            <td>{precoDeVenda}</td>
+            <td>R${preco}</td>
+            <td>R${precoDeVenda}</td>
             <td>{quantidade}</td>
             <td>{data}</td>
-            <td><button onClick={handlerEdit}>Editar</button></td>
+            <td className={styles.testando}>
+                <button onClick={handlerEdit}>Editar</button>
+                <button onClick={handlerDelete}>Excluir</button>
+            </td>
 
         </>
     );
