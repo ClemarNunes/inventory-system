@@ -1,7 +1,7 @@
 import styles from './Layout.module.css';
 import { ReactElement, useState } from 'react'
 import SideBar from '../SideBar'
-import { FormDataContext } from '../../contexts/formData';
+import { FormDataContext, FormDataProvider } from '../../contexts/formData';
 
 type Props = {
     children: ReactElement;
@@ -26,9 +26,16 @@ const Layout = ({ children }: Props) => {
             <SideBar />
 
             <main className={styles.PageBody}>
-                <FormDataContext.Provider value={{ id, setId, ProductName, setProductName, price, setPrice, salePrice, setSalePrice, count,setCount, data,setData }}>
-                    {children}
-                </FormDataContext.Provider>
+                {/* <FormDataContext.Provider value={{ id, setId, ProductName, setProductName, price, setPrice, salePrice, setSalePrice, count,setCount, data,setData }}> */}
+
+                    <FormDataProvider>
+                        {children}
+                    </FormDataProvider>
+                   
+
+
+
+                {/* </FormDataContext.Provider> */}
             </main>
 
 

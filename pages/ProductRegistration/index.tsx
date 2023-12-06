@@ -1,33 +1,30 @@
 import styles from './ProductRegistration.module.css';
 import Registration from '../../components/Registration';
 import { useState } from 'react';
-
-
-import prisma from '../../libs/prisma';
-
+import Search from '../../components/Search/index'
 import Table from '../../components/Table';
 
+import { FormDataContext } from '../../contexts/formData';
+import { useContext } from 'react';
+
+    
 
 
-
-
-type Now = {
+type filterType = {
     name: string;
     id: number;
     preco: number;
     precoDeVenda: number;
     quantidade: number;
     data: string;
-
-}
-
-type Ko = {
-    name: string;
-
 }
  
 const ProductRegistration = () => {
-    const [data, setData] = useState<Now[]>([])
+    const FormContext = useContext(FormDataContext);
+ 
+
+
+    const [data, setData] = useState<filterType[]>([])
     const [searchProduct, setSearchProduct] = useState('');
     const [showTable, setShowTable] = useState(false);
 
@@ -35,9 +32,11 @@ const ProductRegistration = () => {
         if(searchProduct){
             const req = await fetch(`/api/product`);
             const json = await req.json();
-            let filterProduct = json.product.filter((item: Now) => item.name.startsWith(searchProduct));
+            let filterProduct = json.product.filter((item: filterType) => item.name.startsWith(searchProduct));
+            
             setData(filterProduct)
             setShowTable(true);
+            console.log(FormContext?.searchProductContext)
         }
     }
 
@@ -49,12 +48,24 @@ const ProductRegistration = () => {
 
             <div className={styles.ContainerListagemProduto}>
                 <div className={styles.ListaItem}>
+
+                    <Search 
+                        searchProduct={searchProduct} 
+                        setSearchProduct={setSearchProduct} 
+                        
+                        
+
+                        handlerSearch={handlerSearch} 
+                        
+                    />
+
                     <span>Listagem De Produto</span>
                     <input
                         type="text"
                         placeholder='Nome Do Produto'
                         value={searchProduct}
                         onChange={e => setSearchProduct(e.target.value)}
+                        // onChange={e => FormContext?.setSearchProductContext(e.target.value)}
                     />
 
                     <button onClick={handlerSearch} className={styles.button}>Pesquisar</button>
@@ -76,10 +87,12 @@ const ProductRegistration = () => {
 
                         </thead>
 
+                        {/* {FormContext?.searchProductContext.length} */}
+
                         
                         {data.map((item, index) => (
                             <tbody key={index}>
-                                <tr  >
+                                <tr>
                                     <Table handlerSearch={handlerSearch}
                                         name={item.name}
                                         id={item.id}

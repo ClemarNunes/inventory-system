@@ -10,17 +10,9 @@ type Props = {
 }
 
 const Registration = ({ handlerSearch }: Props) => {
-
-
-
     const FormContext = useContext(FormDataContext)
-
-
     const registerProduct = async (e: React.MouseEvent) => {
         e.preventDefault()
-
-        // let identifier = 
-
 
         const req = await fetch(`/api/product/`, {
             method: 'POST',
@@ -64,18 +56,13 @@ const Registration = ({ handlerSearch }: Props) => {
         if (json.status) {
             // alert('ALTERADO')
         }
-
-
         handlerSearch()
         ClearInput()
-        // setData({})
-
-
     }
 
     const ClearInput = () => {
-        FormContext?.setProductName('')
-        FormContext?.setPrice('')
+        FormContext?.setProductName('');
+        FormContext?.setPrice('');
         FormContext?.setSalePrice('');
         FormContext?.setCount('');
         FormContext?.setData('');
@@ -93,8 +80,6 @@ const Registration = ({ handlerSearch }: Props) => {
             <form action="" className={styles.FormArea} >
                 <span>Cadastrar Produtos</span>
                 <div className={styles.formItensArea}>
-
-
 
                     <div className={styles.FormItens}>
 

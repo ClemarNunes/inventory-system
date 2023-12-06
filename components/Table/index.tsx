@@ -19,8 +19,7 @@ type Props = {
 
 
 const Table = ({ id, name, preco, precoDeVenda, quantidade, data, handlerSearch }: Props) => {
-    const FormContext = useContext(FormDataContext)
-    const [nome, setNome] = useState('')
+    const FormContext = useContext(FormDataContext);
 
     const handlerEdit = async () => {
 
@@ -30,12 +29,12 @@ const Table = ({ id, name, preco, precoDeVenda, quantidade, data, handlerSearch 
 
         const res = await req.json();
 
-        FormContext?.setProductName(res.product.name)
-        FormContext?.setPrice(res.product.preco)
-        FormContext?.setSalePrice(res.product.precoDeVenda)
-        FormContext?.setCount(res.product.quantidade)
-        FormContext?.setData(res.product.data)
-        FormContext?.setId(id)
+        FormContext?.setProductName(res.product.name);
+        FormContext?.setPrice(res.product.preco);
+        FormContext?.setSalePrice(res.product.precoDeVenda);
+        FormContext?.setCount(res.product.quantidade);
+        FormContext?.setData(res.product.data);
+        FormContext?.setId(id);
     }
 
     const handlerDelete = async () => {
