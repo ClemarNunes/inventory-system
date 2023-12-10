@@ -9,8 +9,9 @@ type Props = {
     handlerSearch: () => void;
 }
 
-const Registration = ({ handlerSearch }: Props) => {
-    const FormContext = useContext(FormDataContext)
+const Registration = () => {
+    const FormContext = useContext(FormDataContext);
+
     const registerProduct = async (e: React.MouseEvent) => {
         e.preventDefault()
 
@@ -33,7 +34,8 @@ const Registration = ({ handlerSearch }: Props) => {
             alert('adicionado')
         }
         ClearInput()
-        handlerSearch()
+        // handlerSearch()
+        FormContext?.logout()
     }
 
 
@@ -56,15 +58,15 @@ const Registration = ({ handlerSearch }: Props) => {
         if (json.status) {
             // alert('ALTERADO')
         }
-        handlerSearch()
+        FormContext?.logout()
         ClearInput()
     }
 
     const ClearInput = () => {
         FormContext?.setProductName('');
-        FormContext?.setPrice('');
-        FormContext?.setSalePrice('');
-        FormContext?.setCount('');
+        FormContext?.setPrice(0);
+        FormContext?.setSalePrice(0);
+        FormContext?.setCount(0);
         FormContext?.setData('');
     }
 

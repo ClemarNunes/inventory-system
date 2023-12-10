@@ -1,36 +1,29 @@
 import styles from './searchProduct.module.css';
 import { FormDataContext } from '../../contexts/formData';
-
-import { useContext } from 'react';
-
-
+import { useContext, useState } from 'react';
 
 type Props = {
-    searchProduct: string;
-    setSearchProduct: (setSearchProduct: string) => void;
-    handlerSearch: () => void
+    state: string;
+    setState: (state: string) => void;
 }
 
-const Search = ({ searchProduct, setSearchProduct, handlerSearch  }: Props) => {
-
-
+const Search = ({ state, setState }: Props) => {
     const FormContext = useContext(FormDataContext);
 
 
-
     return (
-        <div>
-            <span>Listagem De Produto</span>
+        <div className={styles.ListaItem}>
+            <span>Listagem De Produto</span>  
             <input
                 type="text"
                 placeholder='Nome Do Produto'
-                // value={searchProduct}
-                value={FormContext?.searchProductContext}
-                // onChange={e => setSearchProduct(e.target.value)}
-                onChange={e => FormContext?.setSearchProductContext(e.target.value)}
+
+                value={state}
+                onChange={e => setState(e.target.value)}
             />
 
-            <button onClick={handlerSearch} className={styles.button}>Pesquisar</button>
+            <button onClick={FormContext?.logout} className={styles.button}>Pesquisar</button>
+
         </div>
     );
 }

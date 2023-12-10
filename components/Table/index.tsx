@@ -9,16 +9,9 @@ type Props = {
     precoDeVenda: number;
     quantidade: number;
     data: string;
-    handlerSearch: () => void
-    // setData: (setData: any) => void;
-
 }
 
-
-
-
-
-const Table = ({ id, name, preco, precoDeVenda, quantidade, data, handlerSearch }: Props) => {
+const Table = ({ id, name, preco, precoDeVenda, quantidade, data }: Props) => {
     const FormContext = useContext(FormDataContext);
 
     const handlerEdit = async () => {
@@ -38,19 +31,16 @@ const Table = ({ id, name, preco, precoDeVenda, quantidade, data, handlerSearch 
     }
 
     const handlerDelete = async () => {
-        const req = await(fetch('/api/product/' + id, {
+        const req = await (fetch('/api/product/' + id, {
             method: 'DELETE'
-        }))
+        }));
 
-        // const res = await req.json()
-        console.log(req)
-        handlerSearch()
+        if (req.ok) {
+            FormContext?.logout()
+        }
     }
-
-
     return (
         <>
-
             <td>{name}</td>
             <td>R${preco}</td>
             <td>R${precoDeVenda}</td>
@@ -60,7 +50,6 @@ const Table = ({ id, name, preco, precoDeVenda, quantidade, data, handlerSearch 
                 <button onClick={handlerEdit}>Editar</button>
                 <button onClick={handlerDelete}>Excluir</button>
             </td>
-
         </>
     );
 }

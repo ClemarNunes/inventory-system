@@ -2,39 +2,38 @@ import styles from './ConductSales.module.css';
 import Search from '../../components/Search';
 
 import { FormDataContext } from '../../contexts/formData';
-
 import { useContext } from 'react';
-// import { user } from '../../contexts/formData'
+import SellingProduct from '../../components/SellingProduct';
+
 
 const ConductSales = () => {
 
-
-
     const FormContext = useContext(FormDataContext);
-    // const v = useContext(user)
 
+    return (
 
-    const handle = () => {
-        
-        console.log(FormContext?.dados)
-    }
-
-    return(
-        
         <div className={styles.Container}>
             <div className={styles.painel}>
                 <div className={styles.searchArea}>
-                     {/* <Search   /> */}
-
-                    
-                       
-                     <button onClick={handle}>ok</button>
+                    <div className={styles.teste}>
+                        <Search state={FormContext?.searchConductSales!} setState={FormContext?.setSearchConductSales!} />
+                    </div>
 
                 </div>
 
 
-                <div className={styles.productInformation}>
-                    {FormContext?.ProductName}
+                <div className={styles.product}>
+                    <div className={styles.productArea}>
+
+                        <SellingProduct />
+
+
+                        <div className={styles.SellArea}>
+                            OIiiiiiiiiiiiiii
+
+                        </div>
+
+                    </div>
                 </div>
             </div>
         </div>

@@ -1,14 +1,14 @@
-.Container{
+.Container {
     height: 100%;
     width: 100%;
     /* border: 1px solid red; */
     display: flex;
     align-items: center;
-    padding:38px 40px 38px 0;
+    padding: 38px 40px 38px 0;
 
 }
 
-.painel{
+.painel {
     height: 100%;
     width: 100%;
     background-color: rgba(46, 51, 56, 0.5);
@@ -21,16 +21,45 @@
     flex-direction: column;
 }
 
-.searchArea{
+.searchArea {
     /* border: 1px solid red; */
     color: white;
     background-color: rgba(46, 51, 56, 0.5);
     box-shadow: 0px 0px 5px #595a5a;
+    /* padding: 20px; */
+    display: flex;
+    height: 120px;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+
+
 }
 
-.productInformation{
+.teste {
+    /* border: 1px solid blue; */
+}
+
+.product {
     background-color: rgba(46, 51, 56, 0.5);
     box-shadow: 0px 0px 5px #595a5a;
     width: 100%;
     height: 350px;
+    padding: 15px;
+    /* border: 1px solid red; */
+}
+
+.productArea {
+
+    height: 100%;
+
+    /* border: 1px solid blue; */
+    display: flex; 
+}
+
+.SellArea{
+    border: 1px solid red;
+    width: 40%;
+    position: relative;
 }

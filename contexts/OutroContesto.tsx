@@ -1,4 +1,4 @@
-import React, { ReactNode, createContext, useCallback, useState } from "react";
+import React, { ReactNode, createContext, useCallback, useContext, useState } from "react";
 
 
 
@@ -11,6 +11,16 @@ type Now = {
     data: string;
 }
 
+
+
+type filterType = {
+    name: string;
+    id: number;
+    preco: number;
+    precoDeVenda: number;
+    quantidade: number;
+    data: string;
+}
  
 
  
@@ -19,9 +29,13 @@ type FormDataType = {
  
 
     logout: () => void;
+   
+    input: string  ;
+    setInput: (setInput: string ) => void;
 
-    searchProductContext:string;
-    setSearchProductContext: (setSearchProductContext: any ) => void;
+    dados: filterType[];
+    setDados: (setDados: filterType[]) => void;
+
 }
 
 export const FFormDataContext = createContext<FormDataType | null >(null);
@@ -30,23 +44,29 @@ export const FFormDataContext = createContext<FormDataType | null >(null);
 
  type Props = { children: ReactNode;}
 export const FFormDataProvider = ({ children }:Props) => {
-  
+
+     
     const [searchProductContext, setSearchProductContext] = useState('')
+    const [input, setInput] = useState('');
+    // const [dados, setDados] = useState<filterType[]>([])
+    const [dados, setDados] = useState<filterType[]>([])
 
 
     const handleLogout = useCallback( async () => {
 
         const req = await fetch(`/api/product`);
             const json = await req.json();
-            console.log(json)
-            // let filterProduct = json.product.filter((item: Now) => item.name.startsWith(searchProduct));
+            // console.log(json)
+            let filterProduct = json.product.filter((item: Now) => item.name.startsWith(input));
+            setDados(filterProduct)
+            console.log(input)
     },[])
 
-
+ 
  
 
     return (
-        <FFormDataContext.Provider value={{searchProductContext, setSearchProductContext ,  logout: handleLogout  }}>
+        <FFormDataContext.Provider value={{ input, setInput, dados, setDados ,  logout: handleLogout  }}>
             {children}
         </FFormDataContext.Provider>
     );

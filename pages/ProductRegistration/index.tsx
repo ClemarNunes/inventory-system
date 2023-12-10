@@ -1,79 +1,28 @@
 import styles from './ProductRegistration.module.css';
-import Registration from '../../components/Registration';
 import { useState } from 'react';
+import { useContext } from 'react';
+import { FormDataContext } from '../../contexts/formData';
+
+import Registration from '../../components/Registration';
 import Search from '../../components/Search/index'
 import Table from '../../components/Table';
 
-import { FormDataContext } from '../../contexts/formData';
-import { useContext } from 'react';
-
-    
 
 
-type filterType = {
-    name: string;
-    id: number;
-    preco: number;
-    precoDeVenda: number;
-    quantidade: number;
-    data: string;
-}
- 
 const ProductRegistration = () => {
     const FormContext = useContext(FormDataContext);
- 
-
-
-    const [data, setData] = useState<filterType[]>([])
-    const [searchProduct, setSearchProduct] = useState('');
     const [showTable, setShowTable] = useState(false);
-
-    const handlerSearch = async () => { 
-        if(searchProduct){
-            const req = await fetch(`/api/product`);
-            const json = await req.json();
-            let filterProduct = json.product.filter((item: filterType) => item.name.startsWith(searchProduct));
-            
-            setData(filterProduct)
-            setShowTable(true);
-            console.log(FormContext?.searchProductContext)
-        }
-    }
-
 
     return (
         <div className={styles.Container}>
 
-            <Registration handlerSearch={handlerSearch} />
-
+            <Registration />
             <div className={styles.ContainerListagemProduto}>
                 <div className={styles.ListaItem}>
-
-                    <Search 
-                        searchProduct={searchProduct} 
-                        setSearchProduct={setSearchProduct} 
-                        
-                        
-
-                        handlerSearch={handlerSearch} 
-                        
-                    />
-
-                    <span>Listagem De Produto</span>
-                    <input
-                        type="text"
-                        placeholder='Nome Do Produto'
-                        value={searchProduct}
-                        onChange={e => setSearchProduct(e.target.value)}
-                        // onChange={e => FormContext?.setSearchProductContext(e.target.value)}
-                    />
-
-                    <button onClick={handlerSearch} className={styles.button}>Pesquisar</button>
-
+                    <Search state={FormContext?.searchProductContext!} setState={FormContext?.setSearchProductContext!} />
                 </div>
 
                 <div className={styles.AreaPesquisa} style={{ display: (showTable ? 'block' : 'false') }}>
-
                     <table border={1} className={styles.tableArea}>
                         <thead>
                             <tr>
@@ -84,13 +33,34 @@ const ProductRegistration = () => {
                                 <th>Data</th>
                                 <th>ação</th>
                             </tr>
-
                         </thead>
 
-                        {/* {FormContext?.searchProductContext.length} */}
+                        {FormContext?.newState.map((item, index) => (
+                            <tbody key={index}>
+                                <tr>
+                                    <Table
+                                        name={item.name}
+                                        id={item.id}
+                                        preco={item.preco}
+                                        precoDeVenda={item.precoDeVenda}
+                                        quantidade={item.quantidade}
+                                        data={item.data}
+                                    />
+                                </tr>
+                            </tbody>
+                        ))}
+                    </table>
+                </div>
+            </div>
 
-                        
-                        {data.map((item, index) => (
+        </div>
+    );
+}
+export default ProductRegistration;
+
+
+
+{/* {data.map((item, index) => (
                             <tbody key={index}>
                                 <tr>
                                     <Table handlerSearch={handlerSearch}
@@ -104,18 +74,4 @@ const ProductRegistration = () => {
 
                                 </tr>
                             </tbody>
-                        ))}
-
-                    </table>
-
-                </div>
-
-            </div>
-
-
-        </div>
-    );
-}
-
-
-export default ProductRegistration;
+                        ))} */}
