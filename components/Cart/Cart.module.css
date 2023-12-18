@@ -1,0 +1,96 @@
+.Container {
+    height: 100%;
+    width: 100%;
+    /* padding: 10px; */
+    border: 1px solid rgb(73, 73, 73);
+    /* border: 1px solid red; */
+    color: white;
+    margin-left: 8px;
+}
+
+.CartArea {
+    height: 100%;
+    width: 100%;
+    border: 1px solid black;
+}
+
+
+
+.cartInformations {
+    height: 60%;
+    width: 100%;
+    border: 1px solid #cccccc0c;
+    box-shadow: 0px 0px 15px #cccccc10;
+    /* border: 1px solid red; */
+    overflow-y: auto;
+
+}
+
+.CartItem {
+    /* border: 1px solid red; */
+    border-bottom: 1px solid #615f5f3d;
+    display: flex;
+    /* justify-content: space-between; */
+    /* margin-bottom: 5px; */
+    /* padding: 22px; */
+    height: 100px;
+    /* padding: 20px; */
+}
+
+.payment {
+    /* border: 1px solid red; */
+    /* background-color: aqua; */
+    height: 28%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    /* border: none; */
+    /* justify-content: space-between; */
+}
+
+.paymentInformation {
+    display: flex;
+    justify-content: space-between;
+    /* border: 1px solid red; */
+    padding: 0px 20px;
+    height: 100%;
+    align-items: center;
+
+}
+
+.peymentButton {
+    width: 100%;
+    background-color: rgb(44, 205, 245);
+    /* height: auto; */
+    padding: 10px;
+    color: white;
+    outline: none;
+    border: none;
+
+    cursor: pointer;
+}
+
+
+
+
+.cartImage {
+  align-items: center;
+  display: flex;
+  width: 30%;
+  padding: 5px;  
+}
+
+.cartPrice {
+    width: 50%;
+    height: auto;
+    align-items: center;
+    display: flex;
+}
+
+.CartQt {
+    display: flex;
+    justify-content: space-around;
+    width: 20%;
+    align-items: center;
+}

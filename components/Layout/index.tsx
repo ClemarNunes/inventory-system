@@ -3,6 +3,9 @@ import { ReactElement, useState } from 'react'
 import SideBar from '../SideBar'
 import { FormDataContext, FormDataProvider } from '../../contexts/formData';
 
+
+ 
+ 
 type Props = {
     children: ReactElement;
 }
@@ -29,7 +32,9 @@ const Layout = ({ children }: Props) => {
                 {/* <FormDataContext.Provider value={{ id, setId, ProductName, setProductName, price, setPrice, salePrice, setSalePrice, count,setCount, data,setData }}> */}
 
                     <FormDataProvider>
+                         
                         {children}
+                         
                     </FormDataProvider>
                    
 
