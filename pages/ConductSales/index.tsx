@@ -2,7 +2,7 @@ import styles from './ConductSales.module.css';
 import Search from '../../components/Search';
 
 import { FormDataContext } from '../../contexts/formData';
- 
+
 import { useContext, useEffect, useState } from 'react';
 
 import { useSelector } from 'react-redux';
@@ -20,34 +20,57 @@ type filterType = {
     name: string;
     id: number;
     preco: number;
-    precoDeVenda: number
+    precoDeVenda: number;
     quantidade: number;
+
 }
+
 
 type InitialState = {
-    products: filterType[]
+    products: filterType[];
+    subtotal: { total: number};
 }
-
 
 
 
 const ConductSales = () => {
 
     const products = useSelector((state: StateType) => state.CartReducer.products);
+    const total = useSelector((state: StateType) => state.CartReducer.subtotal );
 
     const FormContext = useContext(FormDataContext);
-     
-    const [novaState, setNovaState] = useState<filterType[]>([]);
-    const [test, setTeste] = useState(0)
-    const [qt, setQt] = useState(1);
-    const [total,setTotal] = useState(0)
-    const handle = () => {
-        console.log(novaState)
+    const [subtotal, setSubtotal] = useState(1);
+
+
+    const peymentButton = async () => {
+        // const req = await fetch(`/api/product/`, {
+        //     method: 'POST',
+        //     headers: {
+        //         'Content-Type': 'Application/json'
+        //     },
+        //     body: JSON.stringify({
+        //         id: products[0].id,
+        //         name: products[0].name,
+        //         preco: products[0].preco,
+        //         precoDeVenda: products[0].precoDeVenda,
+        //         quantidade: products[0].quantidade
+               
+                
+        //     })
+        // })
+
+        
+
+
     }
 
-    const peymentButton = () => {
-        console.log(test)
-    }
+
+
+    
+
+
+
+
 
     return (
 
@@ -68,7 +91,7 @@ const ConductSales = () => {
 
                             {FormContext?.dateConductSales.map((item, index) => (
                                 <div key={index} className={styles.Product}>
-                                    <SellingProduct id={item.id} name={item.name} qt={item.quantidade} sell={item.precoDeVenda} data={item} setNovaState={setNovaState} novaState={novaState} />
+                                    <SellingProduct id={item.id} name={item.name} quantidade={item.quantidade} sell={item.precoDeVenda} data={item}  />
 
                                 </div>
                             ))}
@@ -77,42 +100,40 @@ const ConductSales = () => {
                     </div>
 
 
-                    <div className={styles.CartArea}>
-                        <div>
+                    <div className={styles.Cart}>
+                        <div className={styles.CartArea}>
+                            {products.length > 0 &&
+                                <>
+                                    <div className={styles.cartTitle}>
+                                        <span>Meu carrinho ({products.length})</span>
 
-                            <div className={styles.cartTitle}>
-                                <span>Meu carrinho{ }</span>
+                                    </div>
 
-                            </div>
-                            {products.map((item, index) => (
-                                <div key={index}>
-                                    <Cart name={item.name} qt={qt} preco={item.preco} id={item.id} setQt={setQt} total={total} setTotal={setTotal} />
 
-                                </div>
-                            ))}
+                                    <div className={styles.cartProduct}>
+                                        <Cart qtt={FormContext?.dateConductSales}   subtotal={subtotal} />
+                                    </div>
 
-                            {/* {car !== null &&
-                                <div>
-                                    {car.newState.map((item, index) => (
-                                        <div key={index}>
-                                            {item.id}
+
+                                    <div className={styles.payment}>
+                                        <div className={styles.paymentInformation}>
+
+                                            <span style={{ color: '#fff' }}> <span>Total:</span> {total.total} </span>
                                         </div>
-                                    ))}
-                                </div>
-                            } */}
 
+                                        <div className={styles.buttonArea}>
+                                            <button onClick={peymentButton} className={styles.peymentButton}>Finalizar Ordem </button>
 
-                            <div className={styles.payment}>
-                                <div className={styles.paymentInformation}>
+                                        </div>
 
-                                    <span>Total</span>
-                                    <span >R$10.000,00</span>
-                                </div>
-                                <button onClick={peymentButton} className={styles.peymentButton}>finalizar ordem </button>
+                                    </div>
+                                </>
+                            }
 
-                            </div>
 
                         </div>
+
+
 
                     </div>
 

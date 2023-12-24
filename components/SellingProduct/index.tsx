@@ -1,90 +1,91 @@
 import styles from './SellingProduct.module.css';
 
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { ContextCart } from '../../contexts/contextCart';
 
 import { useSelector, useDispatch } from 'react-redux';
 
 
 type InitialState = {
-    products: filterType[]
+    products: filterType[];
+    subtotal: { total: number};
 }
-
- 
 
 type StateType = {
     CartReducer: InitialState
 }
 
-
 type Props = {
     name: string;
     id: number;
     sell: number;
-    qt: number;
+    quantidade: number;
     data: filterType;
-    setNovaState: (setNovaState: filterType[]) => void;
-    novaState: filterType[];
+    // setNovaState: (setNovaState: number) => void;
+    // novaState: number;
     // setQt: (setQt:number ) => void
     // info: string;
-
-
-    
+     
 }
+
+
+
 type filterType = {
     name: string;
     id: number;
     preco: number;
     precoDeVenda: number
     quantidade: number;
-
+   
 }
 
-type Props2 = {
-    name: string;
-    id: number;
-    preco: number;
-    precoDeVenda: number
-    quantidade: number;
-}
+ 
 
-
-let array: Props2[] = [];
+ 
 let modalQt = 1;
+// let subTotal = 0;
+
+ 
 
 
-
-
-const SellingProduct = ({ id, name, qt, sell, data, setNovaState, novaState }: Props) => {
+const SellingProduct = ({ id, name, quantidade, sell, data }: Props) => {
     const C = useContext(ContextCart);
     const dispatch = useDispatch();
-    // const [qt, setQt] = useState(1);
+
+     
+    let total:number = 0;
+    
 
     const products = useSelector((state: StateType ) => state.CartReducer.products);
 
-    const handleCart = () => {
 
-        // let key = array.findIndex(item => item.id == id);
-        // let copia = [...products]
+    const subtotal = useSelector((state:StateType ) => state.CartReducer.subtotal);
     
+    
+    const handleCart = (qt: number) => {
+
         dispatch({ 
             type: 'ADD_PRODUCT',
             payload: {data, qt} 
         });
 
-        // console.log(qt)
+        dispatch({ type: 'TOTAL' });
+    };
 
-        // console.log(copia)
-        // console.log(key)
-
-        
-
-    }
 
     const teste = () => {
-        // console.log(novaState )   
-        console.log(novaState)
+
+        dispatch({ type: 'TOTAL' })
+
+        // console.log(subtotal)
+     
     }
+    
+    
+    // useEffect(() => {
+    //     console.log(subtotal)
+    // }, [subtotal])
+
 
     return (
         <div className={styles.Container}>
@@ -113,15 +114,16 @@ const SellingProduct = ({ id, name, qt, sell, data, setNovaState, novaState }: P
 
                         <div className={styles.InformationItem}>
                             <span> {id}  </span>
-                            <span> {qt}  </span>
+                            <span> {quantidade}   </span>
                             <span> varejo  </span>
                             <span> R${sell}  </span>
                         </div>
                     </div>
 
                     <div className={styles.InformationButton}>
-                        <button onClick={handleCart}>Adicionar</button>
-                        <button onClick={teste}>teste</button>
+                        <button onClick={() => handleCart(1)}>Adicionar</button>
+                        {/* <button onClick={teste}>teste</button> */}
+                        {/* {subtotal.total  }  */}
                     </div>
                 </div>
  
