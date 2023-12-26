@@ -25,6 +25,8 @@ type filterType = {
 type InitialStateType = {
   products: filterType[];
   subtotal: { total: number | null };
+  // vendas: filterType[];
+  vendasRealizadas: filterType[]
 }
 
 type ActionType = {
@@ -36,7 +38,9 @@ type ActionType = {
 
 export const initialState: InitialStateType = {
   products: [],
-  subtotal: { total: null }
+  subtotal: { total: null },
+  // vendas: [],
+  vendasRealizadas: []
 
 };
 
@@ -45,6 +49,9 @@ export default (state = initialState, action: ActionType) => {
 
   let products = [...state.products];
   let subtotal = { ...state.subtotal };
+
+
+  // let vendas: filterType[][] = [];
 
   switch (action.type) {
     case 'ADD_PRODUCT':
@@ -58,16 +65,16 @@ export default (state = initialState, action: ActionType) => {
       //quantidade => possui o a quantidade de itens disponivel no meu banco de dados.
 
       if (index > -1) { //verifica se um item ja existe no array, se sim, ele aumenta a quantidade.
-        if (products[index].quantidade < qtDisponiveL) { //verifico se a quantidade de itens no car, é menor que a quantidade disponivel
-          products[index] = {
-            ...products[index],  //cria uma cópia superficial do objeto. Isso é feito para garantir que não estamos modificando diretamente o objeto original, seguindo o princípio de imutabilidade.
-            quantidade: products[index].quantidade + qt // Estamos pegando o valor atual de quantidade do objeto original em products[index].quantidade e adicionando a quantidade adicional (qt) que está sendo passada na ação.
-          }
+        // if (products[index].quantidade < qtDisponiveL) { //verifico se a quantidade de itens no car, é menor que a quantidade disponivel
+        //   products[index] = {
+        //     ...products[index],  //cria uma cópia superficial do objeto. Isso é feito para garantir que não estamos modificando diretamente o objeto original, seguindo o princípio de imutabilidade.
+        //     quantidade: products[index].quantidade + qt // Estamos pegando o valor atual de quantidade do objeto original em products[index].quantidade e adicionando a quantidade adicional (qt) que está sendo passada na ação.
+        //   }
 
-        }
+        // }
 
-        // const { quantidade: qtdisponivel } = products[index]
-        // qtdisponivel < qtDisponiveL && (products[index] = {...products[index], quantidade:qtdisponivel +qt })
+        const { quantidade: qtdisponivel } = products[index]
+        qtdisponivel < qtDisponiveL && (products[index] = {...products[index], quantidade:qtdisponivel +qt })
 
       } else { //adiciona um item não existente no array
         products.push({ ...data, quantidade: qt })
@@ -86,14 +93,14 @@ export default (state = initialState, action: ActionType) => {
 
             const { index: i } = action.payload; // pego o index do produto clicado que está no meu cart.
             const { quantidade: q } = products[i];
-          
+
             products[i] = { ...products[i], quantidade: q - 1 };
 
             // if (products[i].quantidade < 1) {
             //   products = products.filter((item, index) => index !== i);
             // }
             // products = products.filter((item, index)=> !(item.quantidade < 1 )); se quantidade == 1, vai verificar se  1 < 1 = não e vai virar true e remover item,  3 - 1 = 2 e 2< 1 = não e vai virar true e remover item
-            products = products.filter((item, index) => item.quantidade >= 1); 
+            products = products.filter((item, index) => item.quantidade >= 1);
 
             break;
           case '+':
@@ -124,6 +131,13 @@ export default (state = initialState, action: ActionType) => {
       return { ...state, subtotal }
       break;
 
+    case 'CLEAR_CART':
+      // vendas = [...vendas,  [...products] ]; 
+      const vendasRealizadas = [...state.vendasRealizadas, [...products]]; 
+       
+
+      return { ...state, products: [], vendasRealizadas };
+      break;
   }
 
 

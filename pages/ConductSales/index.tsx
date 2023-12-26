@@ -5,7 +5,8 @@ import { FormDataContext } from '../../contexts/formData';
 
 import { useContext, useEffect, useState } from 'react';
 
-import { useSelector } from 'react-redux';
+// import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 
 import SellingProduct from '../../components/SellingProduct';
@@ -17,8 +18,8 @@ type StateType = {
 }
 
 type filterType = {
-    name: string;
     id: number;
+    name: string;
     preco: number;
     precoDeVenda: number;
     quantidade: number;
@@ -26,47 +27,79 @@ type filterType = {
 }
 
 
+
+
 type InitialState = {
     products: filterType[];
-    subtotal: { total: number};
+    subtotal: { total: number };
+    
+    vendasRealizadas: filterType[][];
 }
 
 
 
 const ConductSales = () => {
 
-    const products = useSelector((state: StateType) => state.CartReducer.products);
-    const total = useSelector((state: StateType) => state.CartReducer.subtotal );
+
+
+    const total = useSelector((state: StateType) => state.CartReducer.subtotal);
+    const dispatch = useDispatch();
 
     const FormContext = useContext(FormDataContext);
-    const [subtotal, setSubtotal] = useState(1);
 
 
+    let products = useSelector((state: StateType) => state.CartReducer.products);
+     
+    let realizarVendas = useSelector((state: StateType) => state.CartReducer.vendasRealizadas)
     const peymentButton = async () => {
-        // const req = await fetch(`/api/product/`, {
-        //     method: 'POST',
-        //     headers: {
-        //         'Content-Type': 'Application/json'
-        //     },
-        //     body: JSON.stringify({
-        //         id: products[0].id,
-        //         name: products[0].name,
-        //         preco: products[0].preco,
-        //         precoDeVenda: products[0].precoDeVenda,
-        //         quantidade: products[0].quantidade
-               
-                
-        //     })
-        // })
 
-        
+        let data = '';
+
+
+
+
+        for (const item of products) {
+            const { id, name, preco, precoDeVenda, quantidade } = item;
+            let ola = FormContext?.dateConductSales.filter(item => item.id === id);
+            // let index = FormContext?.dateConductSales.findIndex(item => item.id === id);
+
+            // if (index  !== undefined && index !== -1 ) {
+
+            if (ola !== undefined && ola[0].quantidade > 0) {
+
+                console.log(item)
+                const req = await fetch(`/api/product/${id.toString()}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'Application/json'
+                    },
+                    body: JSON.stringify({
+                        name, preco, precoDeVenda, quantidade: ola[0].quantidade -= quantidade, data
+                    })
+                });
+
+                const json = await req.json();
+
+                if (json.status) {
+
+                }
+
+
+                dispatch({
+                    type: 'CLEAR_CART'
+                })
+            }
+
+        }
+
+        // }
 
 
     }
 
 
 
-    
+
 
 
 
@@ -91,7 +124,7 @@ const ConductSales = () => {
 
                             {FormContext?.dateConductSales.map((item, index) => (
                                 <div key={index} className={styles.Product}>
-                                    <SellingProduct id={item.id} name={item.name} quantidade={item.quantidade} sell={item.precoDeVenda} data={item}  />
+                                    <SellingProduct id={item.id} name={item.name} quantidade={item.quantidade} sell={item.precoDeVenda} data={item} />
 
                                 </div>
                             ))}
@@ -111,14 +144,14 @@ const ConductSales = () => {
 
 
                                     <div className={styles.cartProduct}>
-                                        <Cart qtt={FormContext?.dateConductSales}   subtotal={subtotal} />
+                                        <Cart qtt={FormContext?.dateConductSales} />
                                     </div>
 
 
                                     <div className={styles.payment}>
                                         <div className={styles.paymentInformation}>
 
-                                            <span style={{ color: '#fff' }}> <span>Total:</span> {total.total} </span>
+                                            <span style={{ color: '#fff' }}> <span>Total:</span> R${total.total} </span>
                                         </div>
 
                                         <div className={styles.buttonArea}>
@@ -134,6 +167,26 @@ const ConductSales = () => {
                         </div>
 
 
+                        {realizarVendas.map((venda, vendaIndex) => (
+                            <div key={vendaIndex}>
+                                {venda.map((item, itemIndex) => (
+                                    <div key={itemIndex}>
+                                        {item.name}
+                                    </div>
+                                ))}
+                            </div>
+                        ))} 
+
+
+                        {/* {vendas.map((item,index) => (
+                            <div key={index}>
+                                {item.map((item2, index2) => (
+                                    <div key={index2}>
+                                        {item2.name}
+                                    </div>
+                                ))}
+                            </div>
+                        ))} */}
 
                     </div>
 
@@ -161,4 +214,21 @@ const ConductSales = () => {
     );
 }
 
-export default ConductSales
+export default ConductSales;
+
+
+// products.map(item => {
+//     productID = item.id;
+
+
+//     productData = {
+//         id: item.id,
+//         name: item.name,
+//         preco: item.preco,
+//         precoDeVenda: item.precoDeVenda,
+//         quantidade: item.quantidade,
+//         data: ''
+//     }
+
+//     request(productData, productID)
+// });

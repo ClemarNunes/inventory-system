@@ -72,20 +72,7 @@ const SellingProduct = ({ id, name, quantidade, sell, data }: Props) => {
         dispatch({ type: 'TOTAL' });
     };
 
-
-    const teste = () => {
-
-        dispatch({ type: 'TOTAL' })
-
-        // console.log(subtotal)
-     
-    }
-    
-    
-    // useEffect(() => {
-    //     console.log(subtotal)
-    // }, [subtotal])
-
+ 
 
     return (
         <div className={styles.Container}>

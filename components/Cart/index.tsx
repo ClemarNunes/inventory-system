@@ -12,7 +12,7 @@ type Props = {
      
     qtt: filterType[] | undefined;
    
-    subtotal: number;
+    // subtotal: number;
     // maxqt: number;
     // setTeste: (setTeste: number) => void;
 
@@ -41,11 +41,11 @@ type StateType = {
 
 // const products = useSelector((state: StateType) => state.CartReducer.products );  
 
-const Cart = ({ qtt, subtotal }: Props) => {
+const Cart = ({ qtt }: Props) => {
     // const [subtotal, setSubtotal] = useState(0);
     // let subtotal = 0;
     
-    let desconto = 0
+     
 
     const products = useSelector((state: StateType) => state.CartReducer.products);
     const total = useSelector((state:StateType ) => state.CartReducer.subtotal.total )
