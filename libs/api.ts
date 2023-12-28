@@ -15,8 +15,12 @@ export default {
          
 
         const product = await prisma.product.findMany();
-
+        
         return product    
+    },
+    getAllVendas: async() => {
+        const sales = await prisma.sales.findMany();
+        return sales
     }
     // ,
     // Delete: async () => {

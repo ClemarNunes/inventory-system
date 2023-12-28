@@ -48,13 +48,14 @@ let modalQt = 1;
  
 
 
-const SellingProduct = ({ id, name, quantidade, sell, data }: Props) => {
+const SellingProduct = ({ id, name, quantidade:qt, sell, data }: Props) => {
     const C = useContext(ContextCart);
     const dispatch = useDispatch();
+    const [disable,setDisable] = useState(false);
 
      
     let total:number = 0;
-    
+
 
     const products = useSelector((state: StateType ) => state.CartReducer.products);
 
@@ -63,14 +64,19 @@ const SellingProduct = ({ id, name, quantidade, sell, data }: Props) => {
     
     
     const handleCart = (qt: number) => {
-
-        dispatch({ 
-            type: 'ADD_PRODUCT',
-            payload: {data, qt} 
-        });
-
-        dispatch({ type: 'TOTAL' });
-    };
+        const { quantidade } = data;
+        if(quantidade > 0){
+            dispatch({ 
+                type: 'ADD_PRODUCT',
+                payload: {data, qt} 
+            });
+        
+            dispatch({ type: 'TOTAL' });
+        }else{
+            setDisable(true)
+        }
+    }
+        
 
  
 
@@ -101,16 +107,19 @@ const SellingProduct = ({ id, name, quantidade, sell, data }: Props) => {
 
                         <div className={styles.InformationItem}>
                             <span> {id}  </span>
-                            <span> {quantidade}   </span>
+                            <span> {qt}   </span>
                             <span> varejo  </span>
                             <span> R${sell}  </span>
                         </div>
                     </div>
-
++
                     <div className={styles.InformationButton}>
-                        <button onClick={() => handleCart(1)}>Adicionar</button>
-                        {/* <button onClick={teste}>teste</button> */}
-                        {/* {subtotal.total  }  */}
+                        <button onClick={() => handleCart(1)}  
+                        disabled={qt == 0 ? true : false}  
+                        style={{ opacity: (qt == 0 ? '50%' : `100%`), 
+                        cursor: (qt ==  0) ? 'not-allowed' :'pointer'}}
+                    >Adicionar</button>
+                       
                     </div>
                 </div>
  

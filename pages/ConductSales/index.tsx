@@ -32,10 +32,17 @@ type filterType = {
 type InitialState = {
     products: filterType[];
     subtotal: { total: number };
-    
+
     vendasRealizadas: filterType[][];
 }
 
+
+type Props = {
+    nome: string[];
+    pcVenda: number[];
+    qt: number[];
+
+}
 
 
 const ConductSales = () => {
@@ -49,52 +56,73 @@ const ConductSales = () => {
 
 
     let products = useSelector((state: StateType) => state.CartReducer.products);
-     
+
     let realizarVendas = useSelector((state: StateType) => state.CartReducer.vendasRealizadas)
     const peymentButton = async () => {
-
         let data = '';
 
+        const nome = products.map(item => item.name);
+        const pcVenda = products.map(item => item.precoDeVenda);
+        const qt = products.map(item => item.quantidade);
+
+        if (FormContext && FormContext.dateConductSales) {
+            for (const { id, name, preco, precoDeVenda, quantidade } of products) {
+                let indivialProduct = FormContext.dateConductSales.filter(item => item.id === id);
+
+                if (indivialProduct !== undefined && indivialProduct[0].quantidade > 0) {
+
+                    const req = await fetch(`/api/product/${id.toString()}`, {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'Application/json'
+                        },
+                        body: JSON.stringify({
+                            name, preco, precoDeVenda, quantidade: indivialProduct[0].quantidade -= quantidade, data
+                        })
+                    });
+
+                    const json = await req.json();
+
+                    if (json.status) {
+                        console.log('true')
 
 
-
-        for (const item of products) {
-            const { id, name, preco, precoDeVenda, quantidade } = item;
-            let ola = FormContext?.dateConductSales.filter(item => item.id === id);
-            // let index = FormContext?.dateConductSales.findIndex(item => item.id === id);
-
-            // if (index  !== undefined && index !== -1 ) {
-
-            if (ola !== undefined && ola[0].quantidade > 0) {
-
-                console.log(item)
-                const req = await fetch(`/api/product/${id.toString()}`, {
-                    method: 'PUT',
-                    headers: {
-                        'Content-Type': 'Application/json'
-                    },
-                    body: JSON.stringify({
-                        name, preco, precoDeVenda, quantidade: ola[0].quantidade -= quantidade, data
+                    }
+                    dispatch({
+                        type: 'CLEAR_CART'
                     })
-                });
-
-                const json = await req.json();
-
-                if (json.status) {
-
                 }
 
-
-                dispatch({
-                    type: 'CLEAR_CART'
-                })
             }
-
         }
 
-        // }
+        saveSale(nome, pcVenda, qt)
+    }
 
+    const saveSale = async (nome: string[], pcVenda: number[], qt: number[]) => {
 
+        const req = await fetch(`/api/sales/`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'Application/json'
+            },
+            body: JSON.stringify({
+                nome,
+                pcVenda,
+                qt,
+                total: total.total
+            })
+        });
+
+        const json = await req.json();
+        console.log('Resposta do Servidor:', json);
+
+        if (json.status) {
+            console.log('Venda criada:', json);
+            alert('Venda criada com sucesso!');
+        } else {
+            console.error('Erro ao criar venda:', json);
+        }
     }
 
 
@@ -172,10 +200,13 @@ const ConductSales = () => {
                                 {venda.map((item, itemIndex) => (
                                     <div key={itemIndex}>
                                         {item.name}
+                                        {item.preco}
+                                        {item.precoDeVenda}
+                                        quantidade {item.quantidade}
                                     </div>
                                 ))}
                             </div>
-                        ))} 
+                        ))}
 
 
                         {/* {vendas.map((item,index) => (

@@ -64,7 +64,7 @@ export default (state = initialState, action: ActionType) => {
 
       //quantidade => possui o a quantidade de itens disponivel no meu banco de dados.
 
-      if (index > -1) { //verifica se um item ja existe no array, se sim, ele aumenta a quantidade.
+      if (index > -1 ) { //verifica se um item ja existe no array, se sim, ele aumenta a quantidade.
         // if (products[index].quantidade < qtDisponiveL) { //verifico se a quantidade de itens no car, é menor que a quantidade disponivel
         //   products[index] = {
         //     ...products[index],  //cria uma cópia superficial do objeto. Isso é feito para garantir que não estamos modificando diretamente o objeto original, seguindo o princípio de imutabilidade.

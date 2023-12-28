@@ -22,6 +22,14 @@ model Product {
   @@map("produtos")
 }
 
-
+model Sales {
+  id Int @id @default(autoincrement())
+  nome String[]
+  pcVenda Int[]
+  qt Int[]
+  total Int
+  createdAt DateTime @default(now())
+  @@map("vendas")
+}
 
 
