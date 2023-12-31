@@ -47,7 +47,9 @@ type Props = {
 
 const ConductSales = () => {
 
-
+    // let data = new Date();
+    let data = 'oi'
+   
 
     const total = useSelector((state: StateType) => state.CartReducer.subtotal);
     const dispatch = useDispatch();
@@ -58,8 +60,10 @@ const ConductSales = () => {
     let products = useSelector((state: StateType) => state.CartReducer.products);
 
     let realizarVendas = useSelector((state: StateType) => state.CartReducer.vendasRealizadas)
+
     const peymentButton = async () => {
         let data = '';
+
 
         const nome = products.map(item => item.name);
         const pcVenda = products.map(item => item.precoDeVenda);
@@ -97,11 +101,30 @@ const ConductSales = () => {
         }
 
         saveSale(nome, pcVenda, qt)
+
+       
     }
 
-    const saveSale = async (nome: string[], pcVenda: number[], qt: number[]) => {
+    const formatDate = (data: Date) => {
+        let newDate = new Date(data)
+         return `${newDate.getDate()}/${newDate.getMonth()}/${newDate.getFullYear()}`;
+         
+     }
+ 
 
-        const req = await fetch(`/api/sales/`, {
+    const saveSale = async (nome: string[], pcVenda: number[], qt: number[]) => {
+        // let data = new Date().toISOString()
+        // let dataAtual = 
+        // let data = dataAtual.toISOString()
+        let novo = new Date()
+        let data= '30/12/2023'
+        // formatDate(data)
+        console.log(data)
+      
+       
+ 
+
+        const req = await fetch(`/api/sales`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'Application/json'
@@ -110,18 +133,23 @@ const ConductSales = () => {
                 nome,
                 pcVenda,
                 qt,
-                total: total.total
+                total: total.total,
+                data
+
             })
         });
 
         const json = await req.json();
-        console.log('Resposta do Servidor:', json);
+        // console.log('Resposta do Servidor:', json);
 
-        if (json.status) {
-            console.log('Venda criada:', json);
-            alert('Venda criada com sucesso!');
-        } else {
-            console.error('Erro ao criar venda:', json);
+        // if (json.status) {
+        //     console.log('Venda criada:', json);
+        //     alert('Venda criada com sucesso!');
+        // } else {
+        //     console.error('Erro ao criar venda:', json);
+        // }
+        if(json.status){
+            alert('oi')
         }
     }
 
@@ -219,6 +247,9 @@ const ConductSales = () => {
                             </div>
                         ))} */}
 
+                        {/* <button onClick={ ()  => formatDate(data) }>ola</button> */}
+                       
+
                     </div>
 
 
@@ -263,3 +294,11 @@ export default ConductSales;
 
 //     request(productData, productID)
 // });
+
+
+
+
+//  const teste2 = () => {
+    
+//      console.log(formatDate)
+//  }

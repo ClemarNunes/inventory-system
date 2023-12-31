@@ -1,7 +1,7 @@
 import { NextApiHandler } from "next";
 import prisma from "../../../libs/prisma";
 import api from "../../../libs/api";
-
+ 
 
 const handlerGet: NextApiHandler = async (req, res) => {
 
@@ -12,10 +12,10 @@ const handlerGet: NextApiHandler = async (req, res) => {
 
 
 const handlerPost: NextApiHandler = async (req, res) => {
-    const { nome, pcVenda, qt,total } = req.body;
+    const { nome, pcVenda, qt,total, data } = req.body;
 
     const sales = await prisma.sales.create({
-        data: { nome,  pcVenda, qt, total }
+        data: { nome,  pcVenda, qt, total, data }
         
     })
     res.status(201).json({ sale: sales });

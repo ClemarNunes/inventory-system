@@ -29,7 +29,9 @@ model Sales {
   qt Int[]
   total Int
   createdAt DateTime @default(now())
+  data String
   @@map("vendas")
 }
-
+  
+ 
 

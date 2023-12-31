@@ -5,21 +5,67 @@ import Sale from '../../components/Sale';
 type Props = {
     nome: string
 }
+type Te = {
+    total: number;
+}
+type SaleType = {
+    nome: string;
+    pcVenda: number[];
+    qt: number[];
+    total: number;
+    data: string;
+};
+
+type Date = {
+    data: string;
+}
+
 const Sell = () => {
+
     const [sale, setSale] = useState<Props[]>([]);
 
+    const [initialDate, setInitialDate] = useState('');
+    const [endDate, setEndDate] = useState('');
+    const [totalFilter, setTotalFilter] = useState(0);
+
+    const [filteredSales, setFilteredSales] = useState<SaleType[]>([]);
+    const [filterActive, setFilterActive] = useState(false);
+    const [qt, setQt] = useState(0);
+
     useEffect(() => {
-        oi()
-    }, [])
+        if (!filterActive) {
+            fetchDate();
+        }
 
 
-    const oi = async () => {
+    }, [filterActive, initialDate, endDate]);
+
+
+    const fetchDate = async () => {
         const req = await fetch(`/api/sales`);
         const json = await req.json();
-        setSale(json.sales)
-        
+
+        let total = json.sales.reduce((soma: number, valorAtual: Te) => soma + valorAtual.total, 0);
+        setTotalFilter(total);
+
+        setSale(json.sales);
+        setQt(json.sales.length);
     }
 
+
+    const handleFilter = async (e: React.MouseEvent) => {
+        e.preventDefault()
+
+        const req = await fetch(`/api/sales`);
+        const res = await req.json();
+        const filtered = res.sales.filter((item: Date) => item.data >= initialDate && item.data <= endDate);
+        setFilteredSales(filtered);
+
+        let total = filtered.reduce((soma: number, valorAtual: Te) => soma + valorAtual.total, 0);
+        setTotalFilter(total);
+        setQt(filtered.length);
+        setFilterActive(true);
+    }
 
     return (
         <div className={styles.Container}>
@@ -33,11 +79,11 @@ const Sell = () => {
 
                         <div className={styles.saleInformation}>
                             <div>
-                                vendas: 6
+                                vendas: {qt}
                             </div>
 
                             <div>
-                                total: R$1800,00
+                                total: {totalFilter}
                             </div>
                         </div>
 
@@ -49,8 +95,8 @@ const Sell = () => {
                                 <label htmlFor=''>Initial Date</label>
                                 <input
                                     type="date"
-                                // value={FormContext?.data}
-                                // onChange={(e => FormContext?.setData(e.target.value))}
+                                    value={initialDate}
+                                    onChange={(e => setInitialDate(e.target.value))}
                                 />
                             </div>
 
@@ -58,31 +104,33 @@ const Sell = () => {
                                 <label htmlFor=''>End Date</label>
                                 <input
                                     type="date"
-                                // value={FormContext?.data}
-                                // onChange={(e => FormContext?.setData(e.target.value))}
+                                    value={endDate}
+                                    onChange={(e => setEndDate(e.target.value))}
                                 />
                             </div>
                             <div className={styles.formButtonArea}>
-                                <button>Search</button>
+                                <button onClick={handleFilter}>Search</button>
                             </div>
                         </form>
 
                     </div>
+
                 </div>
 
                 <div className={styles.saleArea}>
-                    {sale.map((item, index) => (
+
+                    {(filterActive ? filteredSales : sale).map((item, index) => (
                         <div key={index}>
                             <Sale nome={item.nome} />
                         </div>
                     ))}
 
-                    <button onClick={oi}>ok</button>
                 </div>
 
 
 
             </div>
+
         </div>
     );
 }
