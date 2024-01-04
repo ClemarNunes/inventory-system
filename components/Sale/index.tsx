@@ -2,15 +2,18 @@ import styles from './Sale.module.css';
 
 type Props = {
     nome: string;
+    data: string;
+    total: number;
 
 }
 
-const Sale = ({ nome }:Props) => {
+const Sale = ({ nome, data, total }:Props) => {
     return(
         <div className={styles.Container}>
             <div className={styles.saleAreas}>
                 <div>Venda realizada</div>
-                <div className={styles.salePrice}><span>R$250.00</span></div>
+                <div><span>{data} </span> </div>
+                <div className={styles.salePrice}><span>R${total}</span></div>
 
             </div>
         </div>

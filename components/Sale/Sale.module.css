@@ -1,12 +1,13 @@
 .Container{
     width: 230px;
-    height: 280px;
+    height: 290px;
     /* border: 1px solid red; */
+    border-radius: 10px;
     background: linear-gradient(#124157 30%,#205375 60%, #2b91b9); /* 12b7bd */
     display: flex;
     align-items: center;
     justify-content: center;
-    /* box-shadow: 0px 0px 10px #343535; */
+    box-shadow: 0px 0px 3px #9fa0a0;
      
 }
 

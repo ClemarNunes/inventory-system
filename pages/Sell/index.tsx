@@ -1,9 +1,12 @@
 import styles from './Sell.module.css';
 import { useEffect, useState } from 'react';
 import Sale from '../../components/Sale';
+import Modal from '../../components/Modal';
 
 type Props = {
-    nome: string
+    nome: string;
+    total: number;
+    data:string;
 }
 type Te = {
     total: number;
@@ -23,6 +26,7 @@ type Date = {
 const Sell = () => {
 
     const [sale, setSale] = useState<Props[]>([]);
+
 
     const [initialDate, setInitialDate] = useState('');
     const [endDate, setEndDate] = useState('');
@@ -47,7 +51,7 @@ const Sell = () => {
 
         let total = json.sales.reduce((soma: number, valorAtual: Te) => soma + valorAtual.total, 0);
         setTotalFilter(total);
-
+        console.log(json)
         setSale(json.sales);
         setQt(json.sales.length);
     }
@@ -73,16 +77,16 @@ const Sell = () => {
 
                 <div className={styles.search}>
                     <div className={styles.informationTitle}>
-                        <div>
+                        <div className={styles.saleTitle}>
                             <span>vendas</span>
                         </div>
 
                         <div className={styles.saleInformation}>
-                            <div>
+                            <div className={styles.sales}>
                                 vendas: {qt}
                             </div>
 
-                            <div>
+                            <div className={styles.total}>
                                 total: {totalFilter}
                             </div>
                         </div>
@@ -121,9 +125,11 @@ const Sell = () => {
 
                     {(filterActive ? filteredSales : sale).map((item, index) => (
                         <div key={index}>
-                            <Sale nome={item.nome} />
+                            <Sale nome={item.nome} data={item.data} total={item.total} />
                         </div>
                     ))}
+
+                    {/* <Modal /> */}
 
                 </div>
 
