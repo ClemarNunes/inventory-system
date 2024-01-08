@@ -1,0 +1,36 @@
+.Container {
+    height: 100%;
+    width: 100%;
+    border: 1px solid red;
+    display: flex;
+    align-items: center;
+    padding: 38px 40px 38px 0;
+
+}
+
+.painel {
+    height: 100%;
+    width: 100%;
+    background-color: rgba(46, 51, 56, 0.5);
+    box-shadow: 0px 0px 5px #595a5a;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
+    border: 1px solid red;
+
+}
+
+.MenuArea{
+    width: 500px;
+    height: 300px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.menuItem{
+    width: 100px;
+    height: 100px;
+    border: 1px solid blue;
+}
