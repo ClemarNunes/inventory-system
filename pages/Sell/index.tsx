@@ -2,58 +2,47 @@ import styles from './Sell.module.css';
 import { useEffect, useState } from 'react';
 import Sale from '../../components/Sale';
 import Modal from '../../components/Modal';
-
-type Props = {
-    nome: string;
-    total: number;
-    data:string;
-}
-type Te = {
+import { SaleType } from '../../types/SaleType';
+ 
+type ValorAtualType = {
     total: number;
 }
-type SaleType = {
-    nome: string;
-    pcVenda: number[];
-    qt: number[];
-    total: number;
-    data: string;
-};
-
+ 
 type Date = {
     data: string;
 }
 
 const Sell = () => {
 
-    const [sale, setSale] = useState<Props[]>([]);
-
+    const [sale, setSale] = useState<SaleType[]>([]);
+    const [filteredSales, setFilteredSales] = useState<SaleType[]>([]);
 
     const [initialDate, setInitialDate] = useState('');
     const [endDate, setEndDate] = useState('');
     const [totalFilter, setTotalFilter] = useState(0);
 
-    const [filteredSales, setFilteredSales] = useState<SaleType[]>([]);
     const [filterActive, setFilterActive] = useState(false);
     const [qt, setQt] = useState(0);
+
+    const [activeModal, setActiveModal] = useState(false);
+    const [productModal, setProductModal] = useState<SaleType[]>([]);
 
     useEffect(() => {
         if (!filterActive) {
             fetchDate();
         }
-
-
     }, [filterActive, initialDate, endDate]);
-
 
     const fetchDate = async () => {
         const req = await fetch(`/api/sales`);
         const json = await req.json();
 
-        let total = json.sales.reduce((soma: number, valorAtual: Te) => soma + valorAtual.total, 0);
+        let total = json.sales.reduce((soma: number, valorAtual: ValorAtualType) => soma + valorAtual.total, 0);
         setTotalFilter(total);
-        console.log(json)
+        // console.log(json)
         setSale(json.sales);
         setQt(json.sales.length);
+
     }
 
 
@@ -65,7 +54,7 @@ const Sell = () => {
         const filtered = res.sales.filter((item: Date) => item.data >= initialDate && item.data <= endDate);
         setFilteredSales(filtered);
 
-        let total = filtered.reduce((soma: number, valorAtual: Te) => soma + valorAtual.total, 0);
+        let total = filtered.reduce((soma: number, valorAtual: ValorAtualType) => soma + valorAtual.total, 0);
         setTotalFilter(total);
         setQt(filtered.length);
         setFilterActive(true);
@@ -125,11 +114,21 @@ const Sell = () => {
 
                     {(filterActive ? filteredSales : sale).map((item, index) => (
                         <div key={index}>
-                            <Sale nome={item.nome} data={item.data} total={item.total} />
+
+                            <Sale data={item.data} total={item.total} setActiveModal={setActiveModal} item={item} setProductModal={setProductModal} />
                         </div>
                     ))}
 
-                    {/* <Modal /> */}
+                    {activeModal &&
+
+                        <div>
+
+                            <Modal setActiveModal={setActiveModal} productModal={productModal} />
+
+                        </div>
+
+                    }
+
 
                 </div>
 

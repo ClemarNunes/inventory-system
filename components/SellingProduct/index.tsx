@@ -1,66 +1,25 @@
 import styles from './SellingProduct.module.css';
+import { useState } from 'react';
+import { FilterType } from '../../types/filterType';
 
-import { useContext, useEffect, useState } from 'react';
-import { ContextCart } from '../../contexts/contextCart';
+import { useDispatch } from 'react-redux';
 
-import { useSelector, useDispatch } from 'react-redux';
-
-
-type InitialState = {
-    products: filterType[];
-    subtotal: { total: number};
-}
-
-type StateType = {
-    CartReducer: InitialState
-}
 
 type Props = {
     name: string;
     id: number;
     sell: number;
     quantidade: number;
-    data: filterType;
-    // setNovaState: (setNovaState: number) => void;
-    // novaState: number;
-    // setQt: (setQt:number ) => void
-    // info: string;
-     
+    data: FilterType;
 }
-
-
-
-type filterType = {
-    name: string;
-    id: number;
-    preco: number;
-    precoDeVenda: number
-    quantidade: number;
-   
-}
-
- 
-
- 
-let modalQt = 1;
-// let subTotal = 0;
-
- 
 
 
 const SellingProduct = ({ id, name, quantidade:qt, sell, data }: Props) => {
-    const C = useContext(ContextCart);
+ 
+    let modalQt = 1;
     const dispatch = useDispatch();
     const [disable,setDisable] = useState(false);
 
-     
-    let total:number = 0;
-
-
-    const products = useSelector((state: StateType ) => state.CartReducer.products);
-
-
-    const subtotal = useSelector((state:StateType ) => state.CartReducer.subtotal);
     
     
     const handleCart = (qt: number) => {
@@ -76,10 +35,7 @@ const SellingProduct = ({ id, name, quantidade:qt, sell, data }: Props) => {
             setDisable(true)
         }
     }
-        
-
- 
-
+    
     return (
         <div className={styles.Container}>
 
@@ -112,7 +68,7 @@ const SellingProduct = ({ id, name, quantidade:qt, sell, data }: Props) => {
                             <span> R${sell}  </span>
                         </div>
                     </div>
-+
+
                     <div className={styles.InformationButton}>
                         <button onClick={() => handleCart(1)}  
                         disabled={qt == 0 ? true : false}  

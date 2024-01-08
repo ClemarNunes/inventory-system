@@ -2,34 +2,18 @@ import styles from './Cart.module.css';
 import { ContextCart } from '../../contexts/contextCart';
 import { useContext, useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-
-// import Add from '../Add';
-
-
-
-type Props = {
-
-     
-    qtt: filterType[] | undefined;
-   
-    // subtotal: number;
-    // maxqt: number;
-    // setTeste: (setTeste: number) => void;
-
-}
-type filterType = {
-    name: string;
-    id: number;
-    preco: number;
-    precoDeVenda: number
-    quantidade: number;
-}
+import { FilterType } from '../../types/filterType';
 
  
+type Props = {
 
+    qtt: FilterType[] | undefined;
+
+}
+ 
 type InitialState = {
-    products: filterType[];
-    subtotal: { total: number};
+    products: FilterType[];
+    subtotal: { total: number };
 }
 
 
@@ -38,17 +22,10 @@ type StateType = {
 }
 
 
-
-// const products = useSelector((state: StateType) => state.CartReducer.products );  
-
+ 
 const Cart = ({ qtt }: Props) => {
-    // const [subtotal, setSubtotal] = useState(0);
-    // let subtotal = 0;
-    
-     
-
+ 
     const products = useSelector((state: StateType) => state.CartReducer.products);
-    const total = useSelector((state:StateType ) => state.CartReducer.subtotal.total )
     const dispatch = useDispatch()
 
     const handleMinus = (index: number, type: string) => {
@@ -58,31 +35,18 @@ const Cart = ({ qtt }: Props) => {
             payload: { index, type }
         })
         dispatch({ type: 'TOTAL' });
-       
-
-
     }
-    
- 
+
+
 
     const handlePlus = (index: number, type: string, qt: number) => {
-       
+
         dispatch({
             type: 'CHANGE_PRODUCT',
             payload: { index, type, qt, qtt }
         });
         dispatch({ type: 'TOTAL' })
-       
-        
-       
-
-        
-        // subtotal = calcula()
-        // desconto = (subtotal * 0.1)
-        // total = subtotal - desconto
-       
-
-
+ 
     }
 
 
@@ -119,7 +83,7 @@ const Cart = ({ qtt }: Props) => {
                                 </div>
                             </div>
 
-                            
+
 
 
                         </div>

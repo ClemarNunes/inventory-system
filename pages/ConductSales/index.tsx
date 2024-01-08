@@ -1,14 +1,9 @@
 import styles from './ConductSales.module.css';
 import Search from '../../components/Search';
-
 import { FormDataContext } from '../../contexts/formData';
-
-import { useContext, useEffect, useState } from 'react';
-
-// import { useSelector } from 'react-redux';
+import { useContext } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-
-
+import { FilterType } from '../../types/filterType';
 import SellingProduct from '../../components/SellingProduct';
 import Cart from '../../components/Cart';
 
@@ -16,54 +11,26 @@ import Cart from '../../components/Cart';
 type StateType = {
     CartReducer: InitialState
 }
-
-type filterType = {
-    id: number;
-    name: string;
-    preco: number;
-    precoDeVenda: number;
-    quantidade: number;
-
-}
-
-
-
-
+ 
+ 
 type InitialState = {
-    products: filterType[];
+    products: FilterType[];
     subtotal: { total: number };
-
-    vendasRealizadas: filterType[][];
+    vendasRealizadas: FilterType[][];
 }
 
-
-type Props = {
-    nome: string[];
-    pcVenda: number[];
-    qt: number[];
-
-}
-
-
+ 
 const ConductSales = () => {
-
-    // let data = new Date();
-    let data = 'oi'
-   
 
     const total = useSelector((state: StateType) => state.CartReducer.subtotal);
     const dispatch = useDispatch();
-
     const FormContext = useContext(FormDataContext);
 
-
     let products = useSelector((state: StateType) => state.CartReducer.products);
-
     let realizarVendas = useSelector((state: StateType) => state.CartReducer.vendasRealizadas)
 
     const peymentButton = async () => {
         let data = '';
-
 
         const nome = products.map(item => item.name);
         const pcVenda = products.map(item => item.precoDeVenda);
@@ -113,16 +80,7 @@ const ConductSales = () => {
  
 
     const saveSale = async (nome: string[], pcVenda: number[], qt: number[]) => {
-        // let data = new Date().toISOString()
-        // let dataAtual = 
-        // let data = dataAtual.toISOString()
-        let novo = new Date()
         let data= '30/12/2023'
-        // formatDate(data)
-        console.log(data)
-      
-       
- 
 
         const req = await fetch(`/api/sales`, {
             method: 'POST',
@@ -140,27 +98,12 @@ const ConductSales = () => {
         });
 
         const json = await req.json();
-        // console.log('Resposta do Servidor:', json);
-
-        // if (json.status) {
-        //     console.log('Venda criada:', json);
-        //     alert('Venda criada com sucesso!');
-        // } else {
-        //     console.error('Erro ao criar venda:', json);
-        // }
         if(json.status){
             alert('oi')
         }
     }
 
-
-
-
-
-
-
-
-
+ 
     return (
 
         <div className={styles.Container}>
