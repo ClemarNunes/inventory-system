@@ -1,7 +1,6 @@
 .Container {
     height: 100%;
     width: 100%;
-    border: 1px solid red;
     display: flex;
     align-items: center;
     padding: 38px 40px 38px 0;
@@ -15,11 +14,9 @@
     box-shadow: 0px 0px 5px #595a5a;
     border-radius: 10px;
     display: flex;
-    justify-content: center;
-    align-items: center;
-  
-    border: 1px solid red;
-
+    /* justify-content: center; */
+    /* align-items: center; */
+    flex-direction: column;
 }
 
 .MenuArea{
@@ -28,9 +25,102 @@
     display: flex;
     justify-content: space-between;
 }
+.MenuItens{
+    /* border: 1px solid red; */
+}
 
-.menuItem{
-    width: 100px;
-    height: 100px;
-    border: 1px solid blue;
+.MenuTitle{
+    /* background-color: rgb(36, 149, 255); */
+    /* background: linear-gradient(#134055 30%,#25597c 60%, #2b91b9);  */
+    background: linear-gradient(#20607e 50%,#2d688f 60%, #2784a8); 
+
+ 
+
+
+    height: 70px;
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    color: white;
+    font-weight: bold;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+
+
+.menu{
+    display: flex;
+    /* border: 1px solid red; */
+    height: 50px;
+    background-color: #e9e8e8;
+    align-items: end;
+    border-bottom: 3px solid rgb(27, 151, 182);
+}
+
+
+.menuitem{
+    /* border: 1px solid red; */
+    color: white;
+    background-color: rgb(16, 126, 126);
+    /* background: linear-gradient(#124157 30%,#205375 60%, #2b91b9); 12b7bd */
+    background-color: #e7da22;
+    height: 30px;
+    margin: 0px 10px 0px 10px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    cursor: pointer;
+    
+}
+
+.AreaFilter{
+    height: 30px;
+    background-color: #e9e8e8;
+    display: flex;
+    align-items: center ;
+    justify-content: end;
+    padding: 30px;
+}
+
+
+
+
+
+
+.form{
+    display: flex;
+}
+.FormItens{
+    margin-right: 10px;
+    /* border: 1px solid red; */
+    font-weight: bold;
+    color: hwb(207 9% 9%);
+    display: flex;
+    flex-direction: column;
+ 
+    align-items: center;
+  
+ 
+}
+.FormItens label{
+    margin-right: 10px;
+    /* background-color: #2b91b9; */
+}
+ 
+.formButtonArea{
+    /* border: 1px solid rgb(238, 210, 53); */
+    align-items: end;
+    /* width: 70px; */
+    display: flex;
+}
+
+.formButtonArea button{
+    width: 90px;
+    height: 25px;
+    background-color: #2b91b9;
+    border-radius: 4px;
+    color: white;
 }
