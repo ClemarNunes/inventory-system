@@ -4,7 +4,7 @@
     display: flex;
     align-items: center;
     padding: 38px 40px 38px 0;
-
+ 
 }
 
 .painel {
@@ -17,6 +17,7 @@
     /* justify-content: center; */
     /* align-items: center; */
     flex-direction: column;
+ 
 }
 
 .MenuArea{
@@ -61,7 +62,7 @@
 
 
 .menuitem{
-    /* border: 1px solid red; */
+ 
     color: white;
     background-color: rgb(16, 126, 126);
     /* background: linear-gradient(#124157 30%,#205375 60%, #2b91b9); 12b7bd */
@@ -128,11 +129,4 @@
     background-color: #2b91b9;
     border-radius: 4px;
     color: white;
-}
-
-
-.test{
-    width: 100%;
-    height: 100%;
-    border: 1px solid red;
 }
