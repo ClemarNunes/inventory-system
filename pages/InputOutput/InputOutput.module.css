@@ -14,8 +14,6 @@
     box-shadow: 0px 0px 5px #595a5a;
     border-radius: 10px;
     display: flex;
-    /* justify-content: center; */
-    /* align-items: center; */
     flex-direction: column;
 }
 
@@ -30,8 +28,6 @@
 }
 
 .MenuTitle{
-    /* background-color: rgb(36, 149, 255); */
-    /* background: linear-gradient(#134055 30%,#25597c 60%, #2b91b9);  */
     background: linear-gradient(#20607e 50%,#2d688f 60%, #2784a8); 
 
  
@@ -51,9 +47,7 @@
 
 .menu{
     display: flex;
-    /* border: 1px solid red; */
     height: 50px;
-    /* background-color: #e9e8e8; */
     align-items: end;
     border-bottom: 3px solid rgb(27, 151, 182);
     background-color: #202020;
@@ -61,10 +55,8 @@
 
 
 .menuitem{
-    /* border: 1px solid red; */
     color: white;
     background-color: rgb(16, 126, 126);
-    /* background: linear-gradient(#124157 30%,#205375 60%, #2b91b9); 12b7bd */
     background-color: #e7da22;
     background-color: #858383;
     height: 30px;
@@ -80,14 +72,11 @@
 
 .AreaFilter{
     height: 30px;
-   
     display: flex;
     align-items: center ;
     justify-content: end;
     padding: 30px;
-
      background-color: #1b1b1b;
-     /* border-bottom: 3px solid rgb(27, 151, 182); */
 }
 
 
@@ -100,7 +89,6 @@
 }
 .FormItens{
     margin-right: 10px;
-    /* border: 1px solid red; */
     font-weight: bold;
     color: hwb(207 9% 9%);
     display: flex;
@@ -112,13 +100,10 @@
 }
 .FormItens label{
     margin-right: 10px;
-    /* background-color: #2b91b9; */
 }
  
 .formButtonArea{
-    /* border: 1px solid rgb(238, 210, 53); */
     align-items: end;
-    /* width: 70px; */
     display: flex;
 }
 
