@@ -4,21 +4,38 @@ import Link from 'next/link';
 
 
 import LayoutInputOutput from '../../components/LayoutInputOutput';
- 
+
 const InputOutput = () => {
-  
+
     return (
-
-
-
-        // <div className={styles.Container}>
         <LayoutInputOutput>
-            <div className={styles.test}>
-                oiiooooooooooooooooo
+            <div className={styles.Container}>
+                <div className={styles.cashMovementInformation}>
+                    <div className={styles.winnings}>
+                        <div className={styles.winningsTitle}>
+                            <span>Total de receitas</span>
+                            <span>01-04-2023 a 07-04-2023</span>
+                        </div>
+                        <div className={styles.winningsPrice}>
+                            <span>R$50,00</span>
+                            </div>
+                        <div className={styles.winningsBarra}></div>
+                    </div>
+
+                    <div className={styles.losses}>
+
+                    </div>
+                </div>
+                <div className={styles.cashMovementItens}>oi</div>
+                <div className={styles.totalCashMovement}>
+                    <span>lucro / prejuizo</span>
+                    <span>R$200,00</span>
+                </div>
+
             </div>
 
         </LayoutInputOutput>
-        // </div>
+
     );
 }
 

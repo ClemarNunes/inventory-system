@@ -2,6 +2,7 @@ import { ReactElement } from "react";
 import styles from './LayoutInputOutput.module.css';
 import { navigationLinks } from "../../utils/data";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 
 type Props = {
@@ -9,6 +10,8 @@ type Props = {
 }
 
 const LayoutInputOutput = ({ children }: Props) => {
+    const router = useRouter();
+
     
 
 
@@ -23,7 +26,7 @@ const LayoutInputOutput = ({ children }: Props) => {
                              
 
                             {navigationLinks.map((link, index) => (
-                                <li key={index} className={styles.menuitem}>
+                                <li key={index} className={ router.pathname === link.path ? styles.linkActive : styles.menuitem}>
                                     <Link href={link.path}>{link.label}</Link>
                                 </li>
                             ))}
@@ -62,7 +65,7 @@ const LayoutInputOutput = ({ children }: Props) => {
 
                     </div>
 
-                    <div>
+                    <div className={styles.painelArea}>
                         {children}
                     </div>
 

@@ -7,6 +7,7 @@ export const NavigationLinks = [
 ]
 
 export const navigationLinks = [
+    { label: 'cash movement', path: '/InputOutput', color:'#1eb500' },
     { label: 'Entrada', path: '/InputOutput/entrada', color:'#1eb361' },
     { label: 'Saida', path: '/InputOutput/saida', color: '' },
     { label: 'Detalhes', path: '/InputOutput/detalhes' },

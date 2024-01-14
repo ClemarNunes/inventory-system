@@ -4,10 +4,12 @@
     display: flex;
     align-items: center;
     padding: 38px 40px 38px 0;
+    
  
 }
 
 .painel {
+    
     height: 100%;
     width: 100%;
     background-color: rgba(46, 51, 56, 0.5);
@@ -62,12 +64,12 @@
 
 
 .menuitem{
- 
+ /* border: 1px solid red; */
     color: white;
     background-color: rgb(16, 126, 126);
+    background-color: #2784a8;
     /* background: linear-gradient(#124157 30%,#205375 60%, #2b91b9); 12b7bd */
-    background-color: #e7da22;
-    background-color: #858383;
+     
     height: 30px;
     margin: 0px 10px 0px 10px;
     border-top-left-radius: 5px;
@@ -77,6 +79,18 @@
     padding: 15px;
     cursor: pointer;
     
+}
+
+.linkActive{
+    background-color: yellowgreen;
+    height: 30px;
+    margin: 0px 10px 0px 10px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    cursor: pointer;
 }
 
 .AreaFilter{
@@ -129,4 +143,11 @@
     background-color: #2b91b9;
     border-radius: 4px;
     color: white;
+}
+
+.painelArea{
+    /* border: 1px solid red; */
+    height: 100%;
+    width: 100%;
+     
 }

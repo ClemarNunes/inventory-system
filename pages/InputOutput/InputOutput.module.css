@@ -1,123 +1,83 @@
-.Container {
-    height: 100%;
+.Container{
     width: 100%;
-    display: flex;
-    align-items: center;
-    padding: 38px 40px 38px 0;
-
-}
-
-.painel {
     height: 100%;
-    width: 100%;
-    background-color: rgba(46, 51, 56, 0.5);
-    box-shadow: 0px 0px 5px #595a5a;
-    border-radius: 10px;
+    /* border: 1px solid blue; */
     display: flex;
     flex-direction: column;
 }
 
-.MenuArea{
-    width: 500px;
-    height: 300px;
+.cashMovementInformation{
+    flex: 1;
     display: flex;
-    justify-content: space-between;
-}
-.MenuItens{
-    /* border: 1px solid red; */
-}
-
-.MenuTitle{
-    background: linear-gradient(#20607e 50%,#2d688f 60%, #2784a8); 
-
- 
-
-
-    height: 70px;
-    display: flex;
-    align-items: center;
+    /* background-color: green; */
+    border: 1px solid red;
     padding: 15px;
-    color: white;
-    font-weight: bold;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-}
-
-
-
-.menu{
-    display: flex;
-    height: 50px;
-    align-items: end;
-    border-bottom: 3px solid rgb(27, 151, 182);
-    background-color: #202020;
-}
-
-
-.menuitem{
-    color: white;
-    background-color: rgb(16, 126, 126);
-    background-color: #e7da22;
-    background-color: #858383;
-    height: 30px;
-    margin: 0px 10px 0px 10px;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-    display: flex;
-    align-items: center;
-    padding: 15px;
-    cursor: pointer;
+    /* justify-content: space-between; */
     
 }
 
-.AreaFilter{
-    height: 30px;
+.cashMovementItens{
+    flex: 3;
     display: flex;
-    align-items: center ;
-    justify-content: end;
-    padding: 30px;
-     background-color: #1b1b1b;
+    /* background-color: blue; */
+    
 }
 
-
-
-
-
-
-.form{
+.totalCashMovement{
+    flex: 0.4;
     display: flex;
-}
-.FormItens{
-    margin-right: 10px;
-    font-weight: bold;
-    color: hwb(207 9% 9%);
-    display: flex;
-    flex-direction: column;
- 
+    background-color: rgb(240, 239, 239);
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
     align-items: center;
-  
- 
-}
-.FormItens label{
-    margin-right: 10px;
-}
- 
-.formButtonArea{
-    align-items: end;
-    display: flex;
+    padding: 0px 30px;
+    /* color: white; */
+    font-weight: bold;
+    justify-content: space-between;
+    /* border: 1px solid red; */
+     
 }
 
-.formButtonArea button{
-    width: 90px;
-    height: 25px;
-    background-color: #2b91b9;
-    border-radius: 4px;
-    color: white;
+.winnings{
+    width: 100%;
+    height: 100%;
+    border: 1px solid blue;
+    margin-right: 15px;
+    padding: 5px;
+    background-color: yellowgreen;
+    border-radius: 10px;
+     
 }
 
-
-.test{
+.losses{
     width: 100%;
     height: 100%;
     border: 1px solid red;
+
 }
+
+.winningsTitle{
+    justify-content: space-between;
+    display: flex;
+    height: 33%;
+    /* border: 1px solid red; */
+    /* padding: 10px; */
+}
+
+.winningsPrice{
+    display: flex;
+    align-items: center;
+    height: 33%;
+    /* padding: 10px; */
+    /* border: 1px solid blue; */
+}
+
+.winningsBarra{
+    width: 100%;
+    /* height: 100%; */
+    background-color: rgb(28, 235, 121);
+    height: 35%;
+    border-radius: 10px;
+    /* border: 1px solid red; */
+}
+
