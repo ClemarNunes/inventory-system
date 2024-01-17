@@ -3,7 +3,7 @@ import Search from '../../components/Search';
 import { FormDataContext } from '../../contexts/formData';
 import { useContext } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { FilterType } from '../../types/filterType';
+import { FilterType } from '../../types/FilterType';
 import SellingProduct from '../../components/SellingProduct';
 import Cart from '../../components/Cart';
 
@@ -72,15 +72,21 @@ const ConductSales = () => {
        
     }
 
-    const formatDate = (data: Date) => {
-        let newDate = new Date(data)
-         return `${newDate.getDate()}/${newDate.getMonth()}/${newDate.getFullYear()}`;
-         
+    const formatDate = (date: Date) => {
+        let newDate = new Date(date)
+        //  return `${newDate.getDate()}/${newDate.getMonth()}/${newDate.getFullYear()}`;
+
+         const year = newDate.getFullYear();
+         const month = (newDate.getMonth() + 1).toString().padStart(2, '0'); // Adiciona 1 e formata com dois dígitos
+         const day = newDate.getDate().toString().padStart(2, '0'); // Formata com dois dígitos
+         return `${year}-${month}-${day}`;
      }
  
 
     const saveSale = async (nome: string[], pcVenda: number[], qt: number[]) => {
-        let data= '30/12/2023'
+        // let data= '2023/12/16'
+        const date = new Date();
+        const data = formatDate(date)
 
         const req = await fetch(`/api/sales`, {
             method: 'POST',

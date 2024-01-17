@@ -2,18 +2,6 @@ import prisma from "./prisma"
 
 export default {
     getProducts: async () => {
-       
-
-        // const product = await prisma.product.findMany({
-        //     where:{
-        //         name: {
-        //             startsWith: 'l'
-        //         }
-        //     }
-        // });
-
-         
-
         const product = await prisma.product.findMany();
         
         return product    
@@ -21,18 +9,21 @@ export default {
     getAllVendas: async() => {
         const sales = await prisma.sales.findMany();
         return sales
-    }
-    // ,
-    // Delete: async () => {
-    //     const {id} = req.query
-    //     const deleteProduct = await prisma.product.delete({
-    //         where:{
-    //             id: parseInt(id as string)
-    //         }
-    //     });
+    },
+    getFilterSales: async (initialDate: string, endDate: string) => {
+        const filterSales = await prisma.sales.findMany({
+            where:{
+                data:{
+                    gte: initialDate,
+                    lte: endDate
+                   
+                }
+            }
+        })
 
-    //     return deleteProduct
-    // }
-   
+       
+        return filterSales
+    }
+ 
     
 }

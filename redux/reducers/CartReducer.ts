@@ -1,45 +1,16 @@
-// import { DataInitialState } from "../../types/DataInitialState";
-// import { DataActionType } from "../../types/DataActionType";
+import { DataActionType } from "../../types/DataActionType";
+import { InitialStateType } from "../../types/InitialStateType";
+ 
 
-import { useReducer, useState } from "react";
-
-
-export type DataActionType = {
-  qt: number;
-  id: number;
-  type: string;
-  data: filterType;
-  index: number;
-  qtt: filterType[];
-}
-
-type filterType = {
-  name: string;
-  id: number;
-  preco: number;
-  precoDeVenda: number
-  quantidade: number;
-
-}
-
-type InitialStateType = {
-  products: filterType[];
-  subtotal: { total: number | null };
-  // vendas: filterType[];
-  vendasRealizadas: filterType[]
-}
 
 type ActionType = {
   type: string;
   payload: DataActionType;
 }
 
-
-
 export const initialState: InitialStateType = {
   products: [],
   subtotal: { total: null },
-  // vendas: [],
   vendasRealizadas: []
 
 };

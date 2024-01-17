@@ -1,6 +1,7 @@
 import styles from './SellingProduct.module.css';
 import { useState } from 'react';
-import { FilterType } from '../../types/filterType';
+import { FilterType } from '../../types/FilterType';
+ 
 
 import { useDispatch } from 'react-redux';
 

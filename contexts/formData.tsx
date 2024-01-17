@@ -1,12 +1,11 @@
 import React, { ReactNode, createContext, useState } from "react";
+import { Dados } from "../types/Dados";
 
-type Dados = {
-    name: string;
-    id: number;
-    preco: number;
-    precoDeVenda: number;
-    quantidade: number;
+type Props = { children: ReactNode;}
+
+type Sales = {
     data: string;
+    total: number;
 }
 
 type FormDataType = {
@@ -29,6 +28,12 @@ type FormDataType = {
     data: string;
     setData: (setData: string) => void;
 
+
+
+
+
+
+
     dados: Dados;
     setDados: (setDados: Dados) => void
 
@@ -40,28 +45,30 @@ type FormDataType = {
     searchConductSales: string;
     setSearchConductSales: (setSearchConductSakes: string) => void;
 
-    dateConductSales: filterType[];
-    setDateConductSales: (setDateConductSales: filterType[]) => void;
+    dateConductSales: Dados[];
+    setDateConductSales: (setDateConductSales: Dados[]) => void;
 
 
-    newState: filterType[];
-    setNewState: (setNewState: filterType[]) => void
+    newState: Dados[];
+    setNewState: (setNewState: Dados[]) => void
+
+    sales: Sales[];
+    setSales: (setSales: Sales[]) => void;
+
+    initialDate: string;
+    setInitialDate: (setInitialDate: string ) => void;
+
+    endDate: string;
+    setEndDate: (setEndDate: string ) => void;
+
+    total: number;
+    setTotal: (setTotal: number ) => void;
 }
-
-type filterType = {
-    name: string;
-    id: number;
-    preco: number;
-    precoDeVenda: number;
-    quantidade: number;
-    data: string;
-}
+ 
 
 export const FormDataContext = createContext<FormDataType | null >(null);
 
   
-
- type Props = { children: ReactNode;}
 export const FormDataProvider = ({ children }:Props) => {
 
     const [id, setId] = useState(0)
@@ -72,29 +79,35 @@ export const FormDataProvider = ({ children }:Props) => {
     const [data, setData] = useState('');
     const [dados, setDados] = useState<Dados>({name: '', id: 0, preco: 0, precoDeVenda:0, quantidade: 0, data: ''});
 
-    const [dateConductSales, setDateConductSales] = useState<filterType[]>([]);
-    const [newState, setNewState] = useState<filterType[]>([]);
+    const [dateConductSales, setDateConductSales] = useState<Dados[]>([]);
+    const [newState, setNewState] = useState<Dados[]>([]);
 
     const [searchProductContext, setSearchProductContext] = useState('')
     const [searchConductSales, setSearchConductSales] = useState('');
+
+    const [sales,setSales] = useState<Sales[]>([]);
+ 
+    const [initialDate, setInitialDate] = useState('');
+    const [endDate, setEndDate] = useState('');
+    const [total, setTotal] = useState(0);
 
         const handleLogout = async () => {
             if(searchProductContext || searchConductSales){
                 const req = await fetch(`/api/product`);
                 const json = await req.json();
-                let filterProduct = json.product.filter((item: filterType) => item.name.startsWith(searchProductContext));
+                let filterProduct = json.product.filter((item: Dados) => item.name.startsWith(searchProductContext));
                 setNewState(filterProduct)
             } 
             if(searchConductSales){
                 const req = await fetch(`/api/product`);
                 const json = await req.json();
-                let filterProduct = json.product.filter((item: filterType) => item.name.startsWith(searchConductSales));
+                let filterProduct = json.product.filter((item: Dados) => item.name.startsWith(searchConductSales));
                 setDateConductSales(filterProduct)
             }
         }
 
     return (
-        <FormDataContext.Provider value={{dateConductSales, setDateConductSales, searchConductSales, setSearchConductSales, newState, setNewState,   searchProductContext, setSearchProductContext , dados, setDados, logout: handleLogout ,  id, setId, ProductName, setProductName, price, setPrice, salePrice, setSalePrice, count,setCount, data,setData }}>
+        <FormDataContext.Provider value={{total, setTotal, endDate, setEndDate, initialDate, setInitialDate, sales, setSales, dateConductSales, setDateConductSales, searchConductSales, setSearchConductSales, newState, setNewState,   searchProductContext, setSearchProductContext , dados, setDados, logout: handleLogout ,  id, setId, ProductName, setProductName, price, setPrice, salePrice, setSalePrice, count,setCount, data,setData }}>
             {children}
         </FormDataContext.Provider>
     );

@@ -1,8 +1,6 @@
 import styles from './Cart.module.css';
-import { ContextCart } from '../../contexts/contextCart';
-import { useContext, useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import { FilterType } from '../../types/filterType';
+import { FilterType } from '../../types/FilterType';
 
  
 type Props = {

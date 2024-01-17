@@ -1,59 +1,55 @@
 .Container{
     width: 100%;
     height: 100%;
-    /* border: 1px solid blue; */
     display: flex;
     flex-direction: column;
+    /* border: 1px solid red; */
+     
 }
 
 .cashMovementInformation{
-    flex: 1;
+    flex: 2;
     display: flex;
-    /* background-color: green; */
-    border: 1px solid red;
+    /* border: 1px solid red; */
     padding: 15px;
-    /* justify-content: space-between; */
+   
     
 }
 
 .cashMovementItens{
-    flex: 3;
+    flex: 2;
     display: flex;
     /* background-color: blue; */
     
 }
 
-.totalCashMovement{
-    flex: 0.4;
-    display: flex;
-    background-color: rgb(240, 239, 239);
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
-    align-items: center;
-    padding: 0px 30px;
-    /* color: white; */
-    font-weight: bold;
-    justify-content: space-between;
-    /* border: 1px solid red; */
-     
-}
 
 .winnings{
     width: 100%;
     height: 100%;
-    border: 1px solid blue;
+    /* border: 1px solid blue; */
     margin-right: 15px;
-    padding: 5px;
+    padding: 15px;
     background-color: yellowgreen;
     border-radius: 10px;
-     
+    height: 100%;
+    max-height: 150px;
+    color: #fff;
+    font-weight: bold;
+    /* border: 1px solid red; */
+    
 }
 
 .losses{
     width: 100%;
     height: 100%;
-    border: 1px solid red;
-
+    /* border: 1px solid blue; */
+    background-color: red;
+    border-radius: 10px;
+    max-height: 150px;
+    font-weight: bold;
+    padding: 15px;
+    color: #fff;
 }
 
 .winningsTitle{
@@ -76,8 +72,21 @@
     width: 100%;
     /* height: 100%; */
     background-color: rgb(28, 235, 121);
-    height: 35%;
+    background-color: #fff;
+    height: 30%;
     border-radius: 10px;
     /* border: 1px solid red; */
+    margin-top: 5px;
+   
 }
 
+/* .winningsBarra::after {
+    content: '';
+    width: 100px;
+    height: 30%;
+    background-color: black;
+    
+} */
+
+
+ 

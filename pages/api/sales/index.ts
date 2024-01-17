@@ -18,10 +18,28 @@ const handlerPost: NextApiHandler = async (req, res) => {
         data: { nome,  pcVenda, qt, total, data }
         
     })
-    res.status(201).json({ sale: sales });
+    res.status(201).json({ sale: sales }); 
 
 
 }
+
+const handleFilter: NextApiHandler = async (req, res) => {
+    const {initialDate, endDate } = req.body;
+
+    const FilterSales = await prisma.sales.findMany({
+        where: {
+            data: {
+               startsWith: initialDate,
+               lte: endDate,  
+            }
+        }
+    })
+
+
+    return res.status(200).json({ FilterSales });
+ 
+}
+
 
 const handler: NextApiHandler = (req, res) => {
     switch (req.method) {
@@ -31,6 +49,9 @@ const handler: NextApiHandler = (req, res) => {
         case 'POST':
             handlerPost(req, res)
             break;
+        case 'FILTERSALES':
+            handleFilter(req, res)
+        break;
     }
 }
 
